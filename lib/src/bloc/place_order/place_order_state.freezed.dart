@@ -21,16 +21,20 @@ class _$PlaceOrderStateTearOff {
     return const Idle();
   }
 
-  OrderPlacedInProgress orderPlacedInProgress() {
-    return const OrderPlacedInProgress();
+  Loading loading() {
+    return const Loading();
+  }
+
+  OrderCanceled orderCanceled() {
+    return const OrderCanceled();
   }
 
   OrderSuccessfullyPlaced orderSuccessfullyPlaced() {
     return const OrderSuccessfullyPlaced();
   }
 
-  OrderNotPlaced orderNotPlaced(String message) {
-    return OrderNotPlaced(
+  Error error(String message) {
+    return Error(
       message,
     );
   }
@@ -44,52 +48,57 @@ mixin _$PlaceOrderState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() orderPlacedInProgress,
+    required TResult Function() loading,
+    required TResult Function() orderCanceled,
     required TResult Function() orderSuccessfullyPlaced,
-    required TResult Function(String message) orderNotPlaced,
+    required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(OrderPlacedInProgress value)
-        orderPlacedInProgress,
+    required TResult Function(Loading value) loading,
+    required TResult Function(OrderCanceled value) orderCanceled,
     required TResult Function(OrderSuccessfullyPlaced value)
         orderSuccessfullyPlaced,
-    required TResult Function(OrderNotPlaced value) orderNotPlaced,
+    required TResult Function(Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -150,9 +159,10 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() orderPlacedInProgress,
+    required TResult Function() loading,
+    required TResult Function() orderCanceled,
     required TResult Function() orderSuccessfullyPlaced,
-    required TResult Function(String message) orderNotPlaced,
+    required TResult Function(String message) error,
   }) {
     return idle();
   }
@@ -161,9 +171,10 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
   }) {
     return idle?.call();
   }
@@ -172,9 +183,10 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (idle != null) {
@@ -187,11 +199,11 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(OrderPlacedInProgress value)
-        orderPlacedInProgress,
+    required TResult Function(Loading value) loading,
+    required TResult Function(OrderCanceled value) orderCanceled,
     required TResult Function(OrderSuccessfullyPlaced value)
         orderSuccessfullyPlaced,
-    required TResult Function(OrderNotPlaced value) orderNotPlaced,
+    required TResult Function(Error value) error,
   }) {
     return idle(this);
   }
@@ -200,9 +212,10 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
   }) {
     return idle?.call(this);
   }
@@ -211,9 +224,10 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
     if (idle != null) {
@@ -228,37 +242,34 @@ abstract class Idle implements PlaceOrderState {
 }
 
 /// @nodoc
-abstract class $OrderPlacedInProgressCopyWith<$Res> {
-  factory $OrderPlacedInProgressCopyWith(OrderPlacedInProgress value,
-          $Res Function(OrderPlacedInProgress) then) =
-      _$OrderPlacedInProgressCopyWithImpl<$Res>;
+abstract class $LoadingCopyWith<$Res> {
+  factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
+      _$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$OrderPlacedInProgressCopyWithImpl<$Res>
-    extends _$PlaceOrderStateCopyWithImpl<$Res>
-    implements $OrderPlacedInProgressCopyWith<$Res> {
-  _$OrderPlacedInProgressCopyWithImpl(
-      OrderPlacedInProgress _value, $Res Function(OrderPlacedInProgress) _then)
-      : super(_value, (v) => _then(v as OrderPlacedInProgress));
+class _$LoadingCopyWithImpl<$Res> extends _$PlaceOrderStateCopyWithImpl<$Res>
+    implements $LoadingCopyWith<$Res> {
+  _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
+      : super(_value, (v) => _then(v as Loading));
 
   @override
-  OrderPlacedInProgress get _value => super._value as OrderPlacedInProgress;
+  Loading get _value => super._value as Loading;
 }
 
 /// @nodoc
 
-class _$OrderPlacedInProgress implements OrderPlacedInProgress {
-  const _$OrderPlacedInProgress();
+class _$Loading implements Loading {
+  const _$Loading();
 
   @override
   String toString() {
-    return 'PlaceOrderState.orderPlacedInProgress()';
+    return 'PlaceOrderState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is OrderPlacedInProgress);
+    return identical(this, other) || (other is Loading);
   }
 
   @override
@@ -268,35 +279,38 @@ class _$OrderPlacedInProgress implements OrderPlacedInProgress {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() orderPlacedInProgress,
+    required TResult Function() loading,
+    required TResult Function() orderCanceled,
     required TResult Function() orderSuccessfullyPlaced,
-    required TResult Function(String message) orderNotPlaced,
+    required TResult Function(String message) error,
   }) {
-    return orderPlacedInProgress();
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
   }) {
-    return orderPlacedInProgress?.call();
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
-    if (orderPlacedInProgress != null) {
-      return orderPlacedInProgress();
+    if (loading != null) {
+      return loading();
     }
     return orElse();
   }
@@ -305,44 +319,169 @@ class _$OrderPlacedInProgress implements OrderPlacedInProgress {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(OrderPlacedInProgress value)
-        orderPlacedInProgress,
+    required TResult Function(Loading value) loading,
+    required TResult Function(OrderCanceled value) orderCanceled,
     required TResult Function(OrderSuccessfullyPlaced value)
         orderSuccessfullyPlaced,
-    required TResult Function(OrderNotPlaced value) orderNotPlaced,
+    required TResult Function(Error value) error,
   }) {
-    return orderPlacedInProgress(this);
+    return loading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
   }) {
-    return orderPlacedInProgress?.call(this);
+    return loading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
-    if (orderPlacedInProgress != null) {
-      return orderPlacedInProgress(this);
+    if (loading != null) {
+      return loading(this);
     }
     return orElse();
   }
 }
 
-abstract class OrderPlacedInProgress implements PlaceOrderState {
-  const factory OrderPlacedInProgress() = _$OrderPlacedInProgress;
+abstract class Loading implements PlaceOrderState {
+  const factory Loading() = _$Loading;
+}
+
+/// @nodoc
+abstract class $OrderCanceledCopyWith<$Res> {
+  factory $OrderCanceledCopyWith(
+          OrderCanceled value, $Res Function(OrderCanceled) then) =
+      _$OrderCanceledCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$OrderCanceledCopyWithImpl<$Res>
+    extends _$PlaceOrderStateCopyWithImpl<$Res>
+    implements $OrderCanceledCopyWith<$Res> {
+  _$OrderCanceledCopyWithImpl(
+      OrderCanceled _value, $Res Function(OrderCanceled) _then)
+      : super(_value, (v) => _then(v as OrderCanceled));
+
+  @override
+  OrderCanceled get _value => super._value as OrderCanceled;
+}
+
+/// @nodoc
+
+class _$OrderCanceled implements OrderCanceled {
+  const _$OrderCanceled();
+
+  @override
+  String toString() {
+    return 'PlaceOrderState.orderCanceled()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is OrderCanceled);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() idle,
+    required TResult Function() loading,
+    required TResult Function() orderCanceled,
+    required TResult Function() orderSuccessfullyPlaced,
+    required TResult Function(String message) error,
+  }) {
+    return orderCanceled();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? idle,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
+    TResult Function()? orderSuccessfullyPlaced,
+    TResult Function(String message)? error,
+  }) {
+    return orderCanceled?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? idle,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
+    TResult Function()? orderSuccessfullyPlaced,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (orderCanceled != null) {
+      return orderCanceled();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Idle value) idle,
+    required TResult Function(Loading value) loading,
+    required TResult Function(OrderCanceled value) orderCanceled,
+    required TResult Function(OrderSuccessfullyPlaced value)
+        orderSuccessfullyPlaced,
+    required TResult Function(Error value) error,
+  }) {
+    return orderCanceled(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Idle value)? idle,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
+    TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
+    TResult Function(Error value)? error,
+  }) {
+    return orderCanceled?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Idle value)? idle,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
+    TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (orderCanceled != null) {
+      return orderCanceled(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OrderCanceled implements PlaceOrderState {
+  const factory OrderCanceled() = _$OrderCanceled;
 }
 
 /// @nodoc
@@ -386,9 +525,10 @@ class _$OrderSuccessfullyPlaced implements OrderSuccessfullyPlaced {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() orderPlacedInProgress,
+    required TResult Function() loading,
+    required TResult Function() orderCanceled,
     required TResult Function() orderSuccessfullyPlaced,
-    required TResult Function(String message) orderNotPlaced,
+    required TResult Function(String message) error,
   }) {
     return orderSuccessfullyPlaced();
   }
@@ -397,9 +537,10 @@ class _$OrderSuccessfullyPlaced implements OrderSuccessfullyPlaced {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
   }) {
     return orderSuccessfullyPlaced?.call();
   }
@@ -408,9 +549,10 @@ class _$OrderSuccessfullyPlaced implements OrderSuccessfullyPlaced {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (orderSuccessfullyPlaced != null) {
@@ -423,11 +565,11 @@ class _$OrderSuccessfullyPlaced implements OrderSuccessfullyPlaced {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(OrderPlacedInProgress value)
-        orderPlacedInProgress,
+    required TResult Function(Loading value) loading,
+    required TResult Function(OrderCanceled value) orderCanceled,
     required TResult Function(OrderSuccessfullyPlaced value)
         orderSuccessfullyPlaced,
-    required TResult Function(OrderNotPlaced value) orderNotPlaced,
+    required TResult Function(Error value) error,
   }) {
     return orderSuccessfullyPlaced(this);
   }
@@ -436,9 +578,10 @@ class _$OrderSuccessfullyPlaced implements OrderSuccessfullyPlaced {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
   }) {
     return orderSuccessfullyPlaced?.call(this);
   }
@@ -447,9 +590,10 @@ class _$OrderSuccessfullyPlaced implements OrderSuccessfullyPlaced {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
     if (orderSuccessfullyPlaced != null) {
@@ -464,29 +608,26 @@ abstract class OrderSuccessfullyPlaced implements PlaceOrderState {
 }
 
 /// @nodoc
-abstract class $OrderNotPlacedCopyWith<$Res> {
-  factory $OrderNotPlacedCopyWith(
-          OrderNotPlaced value, $Res Function(OrderNotPlaced) then) =
-      _$OrderNotPlacedCopyWithImpl<$Res>;
+abstract class $ErrorCopyWith<$Res> {
+  factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
+      _$ErrorCopyWithImpl<$Res>;
   $Res call({String message});
 }
 
 /// @nodoc
-class _$OrderNotPlacedCopyWithImpl<$Res>
-    extends _$PlaceOrderStateCopyWithImpl<$Res>
-    implements $OrderNotPlacedCopyWith<$Res> {
-  _$OrderNotPlacedCopyWithImpl(
-      OrderNotPlaced _value, $Res Function(OrderNotPlaced) _then)
-      : super(_value, (v) => _then(v as OrderNotPlaced));
+class _$ErrorCopyWithImpl<$Res> extends _$PlaceOrderStateCopyWithImpl<$Res>
+    implements $ErrorCopyWith<$Res> {
+  _$ErrorCopyWithImpl(Error _value, $Res Function(Error) _then)
+      : super(_value, (v) => _then(v as Error));
 
   @override
-  OrderNotPlaced get _value => super._value as OrderNotPlaced;
+  Error get _value => super._value as Error;
 
   @override
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(OrderNotPlaced(
+    return _then(Error(
       message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -497,21 +638,21 @@ class _$OrderNotPlacedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OrderNotPlaced implements OrderNotPlaced {
-  const _$OrderNotPlaced(this.message);
+class _$Error implements Error {
+  const _$Error(this.message);
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'PlaceOrderState.orderNotPlaced(message: $message)';
+    return 'PlaceOrderState.error(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is OrderNotPlaced &&
+        (other is Error &&
             (identical(other.message, message) ||
                 const DeepCollectionEquality().equals(other.message, message)));
   }
@@ -522,42 +663,45 @@ class _$OrderNotPlaced implements OrderNotPlaced {
 
   @JsonKey(ignore: true)
   @override
-  $OrderNotPlacedCopyWith<OrderNotPlaced> get copyWith =>
-      _$OrderNotPlacedCopyWithImpl<OrderNotPlaced>(this, _$identity);
+  $ErrorCopyWith<Error> get copyWith =>
+      _$ErrorCopyWithImpl<Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() orderPlacedInProgress,
+    required TResult Function() loading,
+    required TResult Function() orderCanceled,
     required TResult Function() orderSuccessfullyPlaced,
-    required TResult Function(String message) orderNotPlaced,
+    required TResult Function(String message) error,
   }) {
-    return orderNotPlaced(message);
+    return error(message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
   }) {
-    return orderNotPlaced?.call(message);
+    return error?.call(message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? orderPlacedInProgress,
+    TResult Function()? loading,
+    TResult Function()? orderCanceled,
     TResult Function()? orderSuccessfullyPlaced,
-    TResult Function(String message)? orderNotPlaced,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
-    if (orderNotPlaced != null) {
-      return orderNotPlaced(message);
+    if (error != null) {
+      return error(message);
     }
     return orElse();
   }
@@ -566,47 +710,48 @@ class _$OrderNotPlaced implements OrderNotPlaced {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(OrderPlacedInProgress value)
-        orderPlacedInProgress,
+    required TResult Function(Loading value) loading,
+    required TResult Function(OrderCanceled value) orderCanceled,
     required TResult Function(OrderSuccessfullyPlaced value)
         orderSuccessfullyPlaced,
-    required TResult Function(OrderNotPlaced value) orderNotPlaced,
+    required TResult Function(Error value) error,
   }) {
-    return orderNotPlaced(this);
+    return error(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
   }) {
-    return orderNotPlaced?.call(this);
+    return error?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(OrderPlacedInProgress value)? orderPlacedInProgress,
+    TResult Function(Loading value)? loading,
+    TResult Function(OrderCanceled value)? orderCanceled,
     TResult Function(OrderSuccessfullyPlaced value)? orderSuccessfullyPlaced,
-    TResult Function(OrderNotPlaced value)? orderNotPlaced,
+    TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
-    if (orderNotPlaced != null) {
-      return orderNotPlaced(this);
+    if (error != null) {
+      return error(this);
     }
     return orElse();
   }
 }
 
-abstract class OrderNotPlaced implements PlaceOrderState {
-  const factory OrderNotPlaced(String message) = _$OrderNotPlaced;
+abstract class Error implements PlaceOrderState {
+  const factory Error(String message) = _$Error;
 
   String get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $OrderNotPlacedCopyWith<OrderNotPlaced> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ErrorCopyWith<Error> get copyWith => throw _privateConstructorUsedError;
 }

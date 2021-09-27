@@ -1,5 +1,5 @@
 Tasks for baqal store
 
-// save cart when user in unauth 
-// save user date time of register
-// add id field to customer model 
+// save cart when user in unauth
+
+// check product status in cart screen like product price has changed or availabelity

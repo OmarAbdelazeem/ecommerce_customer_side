@@ -1,0 +1,40 @@
+1- remove 2 from login page
+2 - bad state after register
+3 - product data in algolia does not update after change
+4 - Bad state: Cannot add new events after calling close after register
+
+5 - after register and navigate to add name screen => The following _CastError was thrown building Consumer<AccountProvider>(dirty, dependencies:
+I/flutter (19816): [_InheritedProviderScope<AccountProvider>]):
+I/flutter (19816): Null check operator used on a null value
+I/flutter (19816):
+I/flutter (19816): The relevant error-causing widget was:
+I/flutter (19816):   Consumer<AccountProvider>
+
+
+// testing
+1 - test create , update ,delete , customer  (done)
+2 - test onCreateOrder and onUpdateOrder (processing.....)
+
+9/9
+1 - after login main home screen does not listen to cart
+2 - after logout cart elements still exist
+3 - cannot open profile screen after login
+
+
+not translated screens
+1 - home [categories , app bar] (done)
+2 - products screen [categories , app bar]  (done)
+3 - product detail screen [ appbar , disc , add button] (done)
+4 - search screen [top products] (done)
+5 - my orders screen [order]  (done)
+6 - order details screen [app bar , order status , date , product item ,...... to the end of the screen] (done)
+7 - add address screen [ choose area , appbar] (done)
+8 - login screen [ textfield , appbar ,] (done)
+9 - edit name screen [edit button , ] (done)
+10 - there is an error when tap continue button in login screen
+
+
+16 / 9
+create router provider because parameter from App is still persistent
+24 / 9
+can not listen to cart after login

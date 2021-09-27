@@ -73,10 +73,6 @@ class _$AuthStateTearOff {
     return const LoginPhoneSuccessfull();
   }
 
-  LoginEmailSuccessfull loginEmailSuccessFull() {
-    return const LoginEmailSuccessfull();
-  }
-
   LoggedInUser loggedInUser() {
     return const LoggedInUser();
   }
@@ -120,7 +116,6 @@ mixin _$AuthState {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -143,7 +138,6 @@ mixin _$AuthState {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -166,7 +160,6 @@ mixin _$AuthState {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -191,8 +184,6 @@ mixin _$AuthState {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -215,7 +206,6 @@ mixin _$AuthState {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -238,7 +228,6 @@ mixin _$AuthState {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -314,7 +303,6 @@ class _$Idle implements Idle {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -340,7 +328,6 @@ class _$Idle implements Idle {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -366,7 +353,6 @@ class _$Idle implements Idle {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -397,8 +383,6 @@ class _$Idle implements Idle {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -424,7 +408,6 @@ class _$Idle implements Idle {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -450,7 +433,6 @@ class _$Idle implements Idle {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -546,7 +528,6 @@ class _$CodeCountDown implements CodeCountDown {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -572,7 +553,6 @@ class _$CodeCountDown implements CodeCountDown {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -598,7 +578,6 @@ class _$CodeCountDown implements CodeCountDown {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -629,8 +608,6 @@ class _$CodeCountDown implements CodeCountDown {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -656,7 +633,6 @@ class _$CodeCountDown implements CodeCountDown {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -682,7 +658,6 @@ class _$CodeCountDown implements CodeCountDown {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -758,7 +733,6 @@ class _$ButtonEnabled implements ButtonEnabled {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -784,7 +758,6 @@ class _$ButtonEnabled implements ButtonEnabled {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -810,7 +783,6 @@ class _$ButtonEnabled implements ButtonEnabled {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -841,8 +813,6 @@ class _$ButtonEnabled implements ButtonEnabled {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -868,7 +838,6 @@ class _$ButtonEnabled implements ButtonEnabled {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -894,7 +863,6 @@ class _$ButtonEnabled implements ButtonEnabled {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -965,7 +933,6 @@ class _$ButtonDisabled implements ButtonDisabled {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -991,7 +958,6 @@ class _$ButtonDisabled implements ButtonDisabled {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1017,7 +983,6 @@ class _$ButtonDisabled implements ButtonDisabled {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1048,8 +1013,6 @@ class _$ButtonDisabled implements ButtonDisabled {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -1075,7 +1038,6 @@ class _$ButtonDisabled implements ButtonDisabled {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -1101,7 +1063,6 @@ class _$ButtonDisabled implements ButtonDisabled {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -1172,7 +1133,6 @@ class _$PhoneLoading implements PhoneLoading {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -1198,7 +1158,6 @@ class _$PhoneLoading implements PhoneLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1224,7 +1183,6 @@ class _$PhoneLoading implements PhoneLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1255,8 +1213,6 @@ class _$PhoneLoading implements PhoneLoading {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -1282,7 +1238,6 @@ class _$PhoneLoading implements PhoneLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -1308,7 +1263,6 @@ class _$PhoneLoading implements PhoneLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -1380,7 +1334,6 @@ class _$ConfirmOtpLoading implements ConfirmOtpLoading {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -1406,7 +1359,6 @@ class _$ConfirmOtpLoading implements ConfirmOtpLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1432,7 +1384,6 @@ class _$ConfirmOtpLoading implements ConfirmOtpLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1463,8 +1414,6 @@ class _$ConfirmOtpLoading implements ConfirmOtpLoading {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -1490,7 +1439,6 @@ class _$ConfirmOtpLoading implements ConfirmOtpLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -1516,7 +1464,6 @@ class _$ConfirmOtpLoading implements ConfirmOtpLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -1587,7 +1534,6 @@ class _$RegisterLoading implements RegisterLoading {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -1613,7 +1559,6 @@ class _$RegisterLoading implements RegisterLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1639,7 +1584,6 @@ class _$RegisterLoading implements RegisterLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1670,8 +1614,6 @@ class _$RegisterLoading implements RegisterLoading {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -1697,7 +1639,6 @@ class _$RegisterLoading implements RegisterLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -1723,7 +1664,6 @@ class _$RegisterLoading implements RegisterLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -1795,7 +1735,6 @@ class _$RegisterSuccessful implements RegisterSuccessful {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -1821,7 +1760,6 @@ class _$RegisterSuccessful implements RegisterSuccessful {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1847,7 +1785,6 @@ class _$RegisterSuccessful implements RegisterSuccessful {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -1878,8 +1815,6 @@ class _$RegisterSuccessful implements RegisterSuccessful {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -1905,7 +1840,6 @@ class _$RegisterSuccessful implements RegisterSuccessful {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -1931,7 +1865,6 @@ class _$RegisterSuccessful implements RegisterSuccessful {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2003,7 +1936,6 @@ class _$PhoneNumberEntered implements PhoneNumberEntered {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -2029,7 +1961,6 @@ class _$PhoneNumberEntered implements PhoneNumberEntered {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2055,7 +1986,6 @@ class _$PhoneNumberEntered implements PhoneNumberEntered {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2086,8 +2016,6 @@ class _$PhoneNumberEntered implements PhoneNumberEntered {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -2113,7 +2041,6 @@ class _$PhoneNumberEntered implements PhoneNumberEntered {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2139,7 +2066,6 @@ class _$PhoneNumberEntered implements PhoneNumberEntered {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2210,7 +2136,6 @@ class _$EmailEntered implements EmailEntered {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -2236,7 +2161,6 @@ class _$EmailEntered implements EmailEntered {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2262,7 +2186,6 @@ class _$EmailEntered implements EmailEntered {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2293,8 +2216,6 @@ class _$EmailEntered implements EmailEntered {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -2320,7 +2241,6 @@ class _$EmailEntered implements EmailEntered {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2346,7 +2266,6 @@ class _$EmailEntered implements EmailEntered {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2417,7 +2336,6 @@ class _$ResendOtpLoading implements ResendOtpLoading {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -2443,7 +2361,6 @@ class _$ResendOtpLoading implements ResendOtpLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2469,7 +2386,6 @@ class _$ResendOtpLoading implements ResendOtpLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2500,8 +2416,6 @@ class _$ResendOtpLoading implements ResendOtpLoading {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -2527,7 +2441,6 @@ class _$ResendOtpLoading implements ResendOtpLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2553,7 +2466,6 @@ class _$ResendOtpLoading implements ResendOtpLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2649,7 +2561,6 @@ class _$AutoFetchOtp implements AutoFetchOtp {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -2675,7 +2586,6 @@ class _$AutoFetchOtp implements AutoFetchOtp {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2701,7 +2611,6 @@ class _$AutoFetchOtp implements AutoFetchOtp {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2732,8 +2641,6 @@ class _$AutoFetchOtp implements AutoFetchOtp {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -2759,7 +2666,6 @@ class _$AutoFetchOtp implements AutoFetchOtp {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2785,7 +2691,6 @@ class _$AutoFetchOtp implements AutoFetchOtp {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2862,7 +2767,6 @@ class _$LoginPhoneSuccessfull implements LoginPhoneSuccessfull {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -2888,7 +2792,6 @@ class _$LoginPhoneSuccessfull implements LoginPhoneSuccessfull {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2914,7 +2817,6 @@ class _$LoginPhoneSuccessfull implements LoginPhoneSuccessfull {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -2945,8 +2847,6 @@ class _$LoginPhoneSuccessfull implements LoginPhoneSuccessfull {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -2972,7 +2872,6 @@ class _$LoginPhoneSuccessfull implements LoginPhoneSuccessfull {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -2998,7 +2897,6 @@ class _$LoginPhoneSuccessfull implements LoginPhoneSuccessfull {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -3015,214 +2913,6 @@ class _$LoginPhoneSuccessfull implements LoginPhoneSuccessfull {
 
 abstract class LoginPhoneSuccessfull implements AuthState {
   const factory LoginPhoneSuccessfull() = _$LoginPhoneSuccessfull;
-}
-
-/// @nodoc
-abstract class $LoginEmailSuccessfullCopyWith<$Res> {
-  factory $LoginEmailSuccessfullCopyWith(LoginEmailSuccessfull value,
-          $Res Function(LoginEmailSuccessfull) then) =
-      _$LoginEmailSuccessfullCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$LoginEmailSuccessfullCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res>
-    implements $LoginEmailSuccessfullCopyWith<$Res> {
-  _$LoginEmailSuccessfullCopyWithImpl(
-      LoginEmailSuccessfull _value, $Res Function(LoginEmailSuccessfull) _then)
-      : super(_value, (v) => _then(v as LoginEmailSuccessfull));
-
-  @override
-  LoginEmailSuccessfull get _value => super._value as LoginEmailSuccessfull;
-}
-
-/// @nodoc
-
-class _$LoginEmailSuccessfull implements LoginEmailSuccessfull {
-  const _$LoginEmailSuccessfull();
-
-  @override
-  String toString() {
-    return 'AuthState.loginEmailSuccessFull()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is LoginEmailSuccessfull);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() idle,
-    required TResult Function(String value) codeCountDown,
-    required TResult Function() onButtonEnabled,
-    required TResult Function() onButtonDisabled,
-    required TResult Function() onPhoneLoading,
-    required TResult Function() confirmOtpLoading,
-    required TResult Function() registerLoading,
-    required TResult Function() registerSuccessful,
-    required TResult Function() isPhoneNumber,
-    required TResult Function() isEmail,
-    required TResult Function() resendOtpLoading,
-    required TResult Function(String otp) autoFetchOtp,
-    required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
-    required TResult Function() loggedInUser,
-    required TResult Function() loggedOutUser,
-    required TResult Function() otpSent,
-    required TResult Function() loginLoading,
-    required TResult Function(String error) showError,
-  }) {
-    return loginEmailSuccessFull();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? idle,
-    TResult Function(String value)? codeCountDown,
-    TResult Function()? onButtonEnabled,
-    TResult Function()? onButtonDisabled,
-    TResult Function()? onPhoneLoading,
-    TResult Function()? confirmOtpLoading,
-    TResult Function()? registerLoading,
-    TResult Function()? registerSuccessful,
-    TResult Function()? isPhoneNumber,
-    TResult Function()? isEmail,
-    TResult Function()? resendOtpLoading,
-    TResult Function(String otp)? autoFetchOtp,
-    TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
-    TResult Function()? loggedInUser,
-    TResult Function()? loggedOutUser,
-    TResult Function()? otpSent,
-    TResult Function()? loginLoading,
-    TResult Function(String error)? showError,
-  }) {
-    return loginEmailSuccessFull?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? idle,
-    TResult Function(String value)? codeCountDown,
-    TResult Function()? onButtonEnabled,
-    TResult Function()? onButtonDisabled,
-    TResult Function()? onPhoneLoading,
-    TResult Function()? confirmOtpLoading,
-    TResult Function()? registerLoading,
-    TResult Function()? registerSuccessful,
-    TResult Function()? isPhoneNumber,
-    TResult Function()? isEmail,
-    TResult Function()? resendOtpLoading,
-    TResult Function(String otp)? autoFetchOtp,
-    TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
-    TResult Function()? loggedInUser,
-    TResult Function()? loggedOutUser,
-    TResult Function()? otpSent,
-    TResult Function()? loginLoading,
-    TResult Function(String error)? showError,
-    required TResult orElse(),
-  }) {
-    if (loginEmailSuccessFull != null) {
-      return loginEmailSuccessFull();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Idle value) idle,
-    required TResult Function(CodeCountDown value) codeCountDown,
-    required TResult Function(ButtonEnabled value) onButtonEnabled,
-    required TResult Function(ButtonDisabled value) onButtonDisabled,
-    required TResult Function(PhoneLoading value) onPhoneLoading,
-    required TResult Function(ConfirmOtpLoading value) confirmOtpLoading,
-    required TResult Function(RegisterLoading value) registerLoading,
-    required TResult Function(RegisterSuccessful value) registerSuccessful,
-    required TResult Function(PhoneNumberEntered value) isPhoneNumber,
-    required TResult Function(EmailEntered value) isEmail,
-    required TResult Function(ResendOtpLoading value) resendOtpLoading,
-    required TResult Function(AutoFetchOtp value) autoFetchOtp,
-    required TResult Function(LoginPhoneSuccessfull value)
-        loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
-    required TResult Function(LoggedInUser value) loggedInUser,
-    required TResult Function(LoggedOutUser value) loggedOutUser,
-    required TResult Function(OtpSent value) otpSent,
-    required TResult Function(LoginLoading value) loginLoading,
-    required TResult Function(ShowError value) showError,
-  }) {
-    return loginEmailSuccessFull(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Idle value)? idle,
-    TResult Function(CodeCountDown value)? codeCountDown,
-    TResult Function(ButtonEnabled value)? onButtonEnabled,
-    TResult Function(ButtonDisabled value)? onButtonDisabled,
-    TResult Function(PhoneLoading value)? onPhoneLoading,
-    TResult Function(ConfirmOtpLoading value)? confirmOtpLoading,
-    TResult Function(RegisterLoading value)? registerLoading,
-    TResult Function(RegisterSuccessful value)? registerSuccessful,
-    TResult Function(PhoneNumberEntered value)? isPhoneNumber,
-    TResult Function(EmailEntered value)? isEmail,
-    TResult Function(ResendOtpLoading value)? resendOtpLoading,
-    TResult Function(AutoFetchOtp value)? autoFetchOtp,
-    TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
-    TResult Function(LoggedInUser value)? loggedInUser,
-    TResult Function(LoggedOutUser value)? loggedOutUser,
-    TResult Function(OtpSent value)? otpSent,
-    TResult Function(LoginLoading value)? loginLoading,
-    TResult Function(ShowError value)? showError,
-  }) {
-    return loginEmailSuccessFull?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Idle value)? idle,
-    TResult Function(CodeCountDown value)? codeCountDown,
-    TResult Function(ButtonEnabled value)? onButtonEnabled,
-    TResult Function(ButtonDisabled value)? onButtonDisabled,
-    TResult Function(PhoneLoading value)? onPhoneLoading,
-    TResult Function(ConfirmOtpLoading value)? confirmOtpLoading,
-    TResult Function(RegisterLoading value)? registerLoading,
-    TResult Function(RegisterSuccessful value)? registerSuccessful,
-    TResult Function(PhoneNumberEntered value)? isPhoneNumber,
-    TResult Function(EmailEntered value)? isEmail,
-    TResult Function(ResendOtpLoading value)? resendOtpLoading,
-    TResult Function(AutoFetchOtp value)? autoFetchOtp,
-    TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
-    TResult Function(LoggedInUser value)? loggedInUser,
-    TResult Function(LoggedOutUser value)? loggedOutUser,
-    TResult Function(OtpSent value)? otpSent,
-    TResult Function(LoginLoading value)? loginLoading,
-    TResult Function(ShowError value)? showError,
-    required TResult orElse(),
-  }) {
-    if (loginEmailSuccessFull != null) {
-      return loginEmailSuccessFull(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoginEmailSuccessfull implements AuthState {
-  const factory LoginEmailSuccessfull() = _$LoginEmailSuccessfull;
 }
 
 /// @nodoc
@@ -3277,7 +2967,6 @@ class _$LoggedInUser implements LoggedInUser {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -3303,7 +2992,6 @@ class _$LoggedInUser implements LoggedInUser {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -3329,7 +3017,6 @@ class _$LoggedInUser implements LoggedInUser {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -3360,8 +3047,6 @@ class _$LoggedInUser implements LoggedInUser {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -3387,7 +3072,6 @@ class _$LoggedInUser implements LoggedInUser {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -3413,7 +3097,6 @@ class _$LoggedInUser implements LoggedInUser {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -3484,7 +3167,6 @@ class _$LoggedOutUser implements LoggedOutUser {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -3510,7 +3192,6 @@ class _$LoggedOutUser implements LoggedOutUser {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -3536,7 +3217,6 @@ class _$LoggedOutUser implements LoggedOutUser {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -3567,8 +3247,6 @@ class _$LoggedOutUser implements LoggedOutUser {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -3594,7 +3272,6 @@ class _$LoggedOutUser implements LoggedOutUser {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -3620,7 +3297,6 @@ class _$LoggedOutUser implements LoggedOutUser {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -3689,7 +3365,6 @@ class _$OtpSent implements OtpSent {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -3715,7 +3390,6 @@ class _$OtpSent implements OtpSent {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -3741,7 +3415,6 @@ class _$OtpSent implements OtpSent {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -3772,8 +3445,6 @@ class _$OtpSent implements OtpSent {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -3799,7 +3470,6 @@ class _$OtpSent implements OtpSent {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -3825,7 +3495,6 @@ class _$OtpSent implements OtpSent {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -3896,7 +3565,6 @@ class _$LoginLoading implements LoginLoading {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -3922,7 +3590,6 @@ class _$LoginLoading implements LoginLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -3948,7 +3615,6 @@ class _$LoginLoading implements LoginLoading {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -3979,8 +3645,6 @@ class _$LoginLoading implements LoginLoading {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -4006,7 +3670,6 @@ class _$LoginLoading implements LoginLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -4032,7 +3695,6 @@ class _$LoginLoading implements LoginLoading {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -4126,7 +3788,6 @@ class _$ShowError implements ShowError {
     required TResult Function() resendOtpLoading,
     required TResult Function(String otp) autoFetchOtp,
     required TResult Function() loginPhoneSuccessFull,
-    required TResult Function() loginEmailSuccessFull,
     required TResult Function() loggedInUser,
     required TResult Function() loggedOutUser,
     required TResult Function() otpSent,
@@ -4152,7 +3813,6 @@ class _$ShowError implements ShowError {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -4178,7 +3838,6 @@ class _$ShowError implements ShowError {
     TResult Function()? resendOtpLoading,
     TResult Function(String otp)? autoFetchOtp,
     TResult Function()? loginPhoneSuccessFull,
-    TResult Function()? loginEmailSuccessFull,
     TResult Function()? loggedInUser,
     TResult Function()? loggedOutUser,
     TResult Function()? otpSent,
@@ -4209,8 +3868,6 @@ class _$ShowError implements ShowError {
     required TResult Function(AutoFetchOtp value) autoFetchOtp,
     required TResult Function(LoginPhoneSuccessfull value)
         loginPhoneSuccessFull,
-    required TResult Function(LoginEmailSuccessfull value)
-        loginEmailSuccessFull,
     required TResult Function(LoggedInUser value) loggedInUser,
     required TResult Function(LoggedOutUser value) loggedOutUser,
     required TResult Function(OtpSent value) otpSent,
@@ -4236,7 +3893,6 @@ class _$ShowError implements ShowError {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,
@@ -4262,7 +3918,6 @@ class _$ShowError implements ShowError {
     TResult Function(ResendOtpLoading value)? resendOtpLoading,
     TResult Function(AutoFetchOtp value)? autoFetchOtp,
     TResult Function(LoginPhoneSuccessfull value)? loginPhoneSuccessFull,
-    TResult Function(LoginEmailSuccessfull value)? loginEmailSuccessFull,
     TResult Function(LoggedInUser value)? loggedInUser,
     TResult Function(LoggedOutUser value)? loggedOutUser,
     TResult Function(OtpSent value)? otpSent,

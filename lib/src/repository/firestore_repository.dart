@@ -1,76 +1,216 @@
+import 'package:baqal/src/models/name_field.dart';
+import 'package:baqal/src/notifiers/account_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:baqal/src/di/app_injector.dart';
 import 'package:baqal/src/models/account_details_model.dart';
-import 'package:baqal/src/models/cartModel_model.dart';
+import 'package:baqal/src/models/cart_model.dart';
 import 'package:baqal/src/models/order_model.dart';
 import 'package:baqal/src/models/basic_order_model.dart';
 import 'package:baqal/src/models/product_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'auth_repository.dart';
-import 'package:uuid/uuid.dart';
 
 class FirestoreRepository {
-  var authRepo = getItInstance<FirebaseRepository>();
+  var _firebaseRepo = getItInstance<FirebaseRepository>();
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  AccountProvider _accountProvider = getItInstance<AccountProvider>();
 
-  Future<DocumentSnapshot> getCategoyInfo(
-      {String? categoryName, bool isMainCategories = false}) async {
-    var data = await _firestore
-        .collection('categories')
-        .doc(!isMainCategories ? categoryName : 'mainCategories')
+  Future<DocumentSnapshot?> getCartItem(String itemId) async{
+   final cartItemSnapShot = await _firestore
+        .collection('customers').doc('details').collection('customers')
+        .doc(_accountProvider.user!.uid)
+        .collection('cart')
+        .doc(itemId)
         .get();
-    return data;
+   if(cartItemSnapShot.exists)
+     return cartItemSnapShot;
+   else return null;
   }
 
-  Future<List<DocumentSnapshot>> getAllProducts(
-      {DocumentSnapshot? documentSnapshot, String ?condition}) async {
-    late List<DocumentSnapshot> documentList;
-    // var query = _firestore.collection("final_products").limit(20).orderBy("name");
-    var query = _firestore.collection("products").limit(20);
-    if (condition != null) {
-      documentList =
-          (await query.where('section', isEqualTo: condition).get())
-              .docs;
-    }
+  // Future<DocumentSnapshot> getCategoyInfo(
+  //     {String? categoryName, bool isMainCategories = false}) async {
+  //   var data = await _firestore
+  //       .collection('categories')
+  //       .doc(!isMainCategories ? categoryName : 'mainCategories')
+  //       .get();
+  //   return data;
+  // }
 
-    if (documentSnapshot != null) {
+  Stream<QuerySnapshot> listenToOrders(
+      {required String userId, DocumentSnapshot? documentSnapshot}) {
+    var snapshots;
+    var reference = _firestore
+        .collection('customers')
+        .doc('details')
+        .collection('customers')
+        .doc(userId)
+        .collection('orders')
+        .limit(20)
+        .orderBy("ordered_at", descending: true);
+
+    if (documentSnapshot != null)
+      snapshots = reference.startAfterDocument(documentSnapshot).snapshots();
+    else
+      snapshots = reference.snapshots();
+    return snapshots;
+  }
+
+  Future<DocumentSnapshot> getProductData(String productId) async {
+    return _firestore
+        .collection('products')
+        .doc('details')
+        .collection('products')
+        .doc(productId)
+        .get();
+  }
+
+  Future<DocumentSnapshot> getBannerData(String bannerId) async {
+    return _firestore.collection('banners').doc(bannerId).get();
+  }
+
+  fetchDeliveryAreas() async {
+    return (await _firestore.collection('deliveryAreas').get()).docs;
+  }
+
+  fetchTopProducts() async {
+    return (await _firestore
+            .collection('products')
+            .doc('details')
+            .collection('products')
+            .orderBy('number_of_sales', descending: true)
+            .limit(10)
+            .get())
+        .docs;
+  }
+
+  // getProductData(String productId)async{
+  //  var productData = await _firestore.collection('products').doc(productId).get();
+  //  return productData;
+  // }
+  Future<List<DocumentSnapshot>> fetchProducts(
+      {DocumentSnapshot? documentSnapshot, required String filterId}) async {
+    late List<DocumentSnapshot> documentList;
+    var query = _firestore
+        .collection("products")
+        .doc('details')
+        .collection('products')
+        .limit(20);
+
+    if (documentSnapshot != null)
+      documentList = (await query
+              .startAfterDocument(documentSnapshot)
+              .where('filter_ids', arrayContains: filterId)
+              .get())
+          .docs;
+    else
       documentList =
-          (await query.startAfterDocument(documentSnapshot).get())
-              .docs;
-    }
-    // else {
-    //   documentList = (await query.getDocuments()).documents;
+          (await query.where('filter_ids', arrayContains: filterId).get()).docs;
+
+    // if (bannerName != null) {
+    //   if (documentSnapshot != null)
+    //     documentList = (await query
+    //         .startAfterDocument(documentSnapshot)
+    //         .where('banners', arrayContains: bannerName.toJson())
+    //         .get())
+    //         .docs;
+    //   else
+    //     documentList = (await query
+    //         .where('banners', arrayContains: bannerName.toJson())
+    //         .get())
+    //         .docs;
+    // } else if (subCategoryName != null) {
+    //   if (documentSnapshot != null)
+    //     documentList = (await query
+    //         .startAfterDocument(documentSnapshot)
+    //         .where('sub_category', isEqualTo: subCategoryName.toJson())
+    //         .get())
+    //         .docs;
+    //   else
+    //     documentList = (await query
+    //         .where('sub_category', isEqualTo: subCategoryName.toJson())
+    //         .get())
+    //         .docs;
     // }
+
     return documentList;
   }
 
-  Future cancelOrder(String orderId) async {
-    final orderRef = _firestore
-        .collection('users')
-        .doc(await authRepo.getUid())
+  // Future<List<DocumentSnapshot>> fetchProducts(
+  //     {DocumentSnapshot? documentSnapshot,
+  //     NameField? subCategoryName,
+  //     NameField? bannerName}) async {
+  //   late List<DocumentSnapshot> documentList;
+  //   var query = _firestore
+  //       .collection("products")
+  //       .doc('details')
+  //       .collection('products')
+  //       .limit(20);
+  //
+  //   if (bannerName != null) {
+  //     if (documentSnapshot != null)
+  //       documentList = (await query
+  //               .startAfterDocument(documentSnapshot)
+  //               .where('banners', arrayContains: bannerName.toJson())
+  //               .get())
+  //           .docs;
+  //     else
+  //       documentList = (await query
+  //               .where('banners', arrayContains: bannerName.toJson())
+  //               .get())
+  //           .docs;
+  //   } else if (subCategoryName != null) {
+  //     if (documentSnapshot != null)
+  //       documentList = (await query
+  //               .startAfterDocument(documentSnapshot)
+  //               .where('sub_category', isEqualTo: subCategoryName.toJson())
+  //               .get())
+  //           .docs;
+  //     else
+  //       documentList = (await query
+  //               .where('sub_category', isEqualTo: subCategoryName.toJson())
+  //               .get())
+  //           .docs;
+  //   }
+  //
+  //   return documentList;
+  // }
+
+  Stream<DocumentSnapshot> fetchOrderDetails(String id) {
+    final orderData = _firestore
         .collection('orders')
-        .doc(orderId);
-    await orderRef.update({'order_status': 'Canceled'});
-    
-    await orderRef
+        .doc(id)
         .collection('details')
-        .doc('details')
-        .update({'order_status': 'Canceled'});
+        .doc(id)
+        .snapshots();
+    return orderData;
+  }
+
+  Future cancelOrder(String orderId) async {
+    final orderRef = _firestore.collection('orders').doc(orderId);
+    final orderDetailsRef = orderRef.collection('details').doc(orderId);
+
+    await orderRef.update({'order_status': 'Canceled'});
+    await orderDetailsRef.update({'order_status': 'Canceled'});
+
+    // await orderRef
+    //     .collection('details')
+    //     .doc('details')
+    //     .update({'order_status': 'Canceled'});
   }
 
   Future<List<DocumentSnapshot>> getAllOrders(
       [DocumentSnapshot? documentSnapshot]) async {
     List<DocumentSnapshot> documentList;
     var query = _firestore
-        .collection("users")
-        .doc(await authRepo.getUid())
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
         .collection("orders")
         .limit(20)
         .orderBy("ordered_at", descending: true);
     if (documentSnapshot != null) {
       documentList =
-          (await query.startAfterDocument(documentSnapshot).get())
-              .docs;
+          (await query.startAfterDocument(documentSnapshot).get()).docs;
     } else {
       documentList = (await query.get()).docs;
     }
@@ -80,6 +220,8 @@ class FirestoreRepository {
   Future<List<DocumentSnapshot>> searchProducts(String query) async {
     List<DocumentSnapshot> documentList = (await _firestore
             .collection("products")
+            .doc('details')
+            .collection('products')
             .where("name_search", arrayContains: query)
             .get())
         .docs;
@@ -89,12 +231,23 @@ class FirestoreRepository {
   Future<List<ProductModel>> getProductsData(String condition) async {
     List<DocumentSnapshot> docList = (await _firestore
             .collection("products")
+            .doc('details')
+            .collection('products')
             .where(condition, isEqualTo: true)
             .get())
         .docs;
     return List.generate(docList.length, (index) {
       return ProductModel.fromJson(docList[index]);
     });
+  }
+
+  Future<List<QueryDocumentSnapshot>> fetchSubCategories(
+      String categoryId) async {
+    return (await _firestore
+            .collection('subCategories')
+            .where('main_category_id', isEqualTo: categoryId)
+            .get())
+        .docs;
   }
 
   // Future<List<DocumentSnapshot>> getAllProductsData(
@@ -109,90 +262,153 @@ class FirestoreRepository {
   //   return documentList;
   // }
 
-  Future<List<DocumentSnapshot>> getAllCategoryProducts(
-    String categoryId,
-  ) async {
-    print(categoryId);
-    List<DocumentSnapshot> documentList = (await _firestore
-            .collection("test_products")
-            .doc(categoryId)
-            .collection('categoryProducts')
-            .get())
-        .docs;
-    return documentList;
-  }
+  // Future<List<DocumentSnapshot>> getAllCategoryProducts(
+  //   String categoryId,
+  // ) async {
+  //   print(categoryId);
+  //   List<DocumentSnapshot> documentList = (await _firestore
+  //           .collection("test_products")
+  //           .doc(categoryId)
+  //           .collection('categoryProducts')
+  //           .get())
+  //       .docs;
+  //   return documentList;
+  // }
 
   Future<AccountDetails> getAllFaq() async {
     DocumentSnapshot document = await _firestore
-        .collection("users")
-        .doc(await authRepo.getUid())
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
         .collection("account")
         .doc("details")
         .get();
     return AccountDetails.fromDocument(document);
   }
 
+  Future deleteAddress(String addressId) async {
+    await _firestore
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
+        .collection('addresses')
+        .doc(addressId)
+        .delete();
+  }
+
+  // Future<int> checkItemInCart(String productId) async {
+  //   try {
+  //     DocumentSnapshot documentSnapshot = await _firestore
+  //         .collection("users")
+  //         .doc((await _firebaseRepo.getCurrentUser())!.uid)
+  //         .collection("cart")
+  //         .doc(productId)
+  //         .get();
+  //     if (documentSnapshot.exists) {
+  //       return documentSnapshot["no_of_items"];
+  //     } else {
+  //       return 0;
+  //     }
+  //   } catch (e) {
+  //     return 0;
+  //   }
+  // }
+
   Future<int> checkItemInCart(String productId) async {
-    try {
-      DocumentSnapshot documentSnapshot = await _firestore
-          .collection("users")
-          .doc(await authRepo.getUid())
-          .collection("cart")
-          .doc(productId)
-          .get();
-      if (documentSnapshot.exists) {
-        return documentSnapshot["no_of_items"];
-      } else {
-        return 0;
-      }
-    } catch (e) {
+    var documentSnapshot = await _firestore
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
+        .collection('cart')
+        .doc(productId)
+        .get();
+    if (documentSnapshot.exists) {
+      return documentSnapshot['number_of_items'];
+    } else {
       return 0;
     }
   }
 
-  Future<void> addProductToCart(CartModel cartModel) async {
+  Future<void> addItemToOnlineCart(CartItemModel cartModel) async {
     return await _firestore
-        .collection("users")
-        .doc(await authRepo.getUid())
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
         .collection("cart")
         .doc(cartModel.productId)
         .set(cartModel.toJson());
   }
 
-  Future<void> delProductFromCart(String productId) async {
+  Future<void> deleteProductFromCart(String productId) async {
     return await _firestore
-        .collection("users")
-        .doc(await authRepo.getUid())
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
         .collection("cart")
         .doc(productId)
         .delete();
   }
 
-  // Future<bool> checkUserDetail() async {
-  //   try {
-  //     DocumentSnapshot documentSnapshot = await _firestore
-  //         .collection("users")
-  //         .document(await authRepo.getUid())
-  //         .collection("account")
-  //         .document("details")
-  //         .get();
-  //     if (documentSnapshot.exists) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } catch (e) {
-  //     return false;
-  //   }
-  // }
+  Future<int> checkProductInCart(String productId) async {
+    var cartDoc = await _firestore
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
+        .collection('cart')
+        .doc(productId)
+        .get();
+    if (cartDoc.exists) {
+      return cartDoc['number_of_items'];
+    } else {
+      return 0;
+    }
+  }
 
-  Future checkUserDetail() async {
+  Stream<DocumentSnapshot> listenToCartItem(
+      {required String productId, required String userId}) {
+    return _firestore
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc(userId)
+        .collection('cart')
+        .doc(productId)
+        .snapshots();
+  }
+
+  Stream<DocumentSnapshot> listenToProductUpdates(String productId) {
+    return _firestore
+        .collection('products')
+        .doc('details')
+        .collection('products')
+        .doc(productId)
+        .snapshots();
+  }
+
+  Future fetchUserAddresses() async {
+    return (await _firestore
+            .collection("customers")
+            .doc('details')
+            .collection('customers')
+            .doc(_accountProvider.user!.uid)
+            .collection('addresses')
+            .get())
+        .docs;
+  }
+
+  Future getUserData(String id) async {
     try {
       DocumentSnapshot documentSnapshot = await _firestore
-          .collection("users")
-          .doc(await authRepo.getUid())
-          // .collection("account")
-          // .document("details")
+          .collection("customers")
+          .doc('details')
+          .collection('customers')
+          .doc(id)
           .get();
       if (documentSnapshot.exists) {
         return documentSnapshot.data();
@@ -205,29 +421,41 @@ class FirestoreRepository {
   }
 
   Future<void> addUserDetails(AccountDetails accountDetails) async {
+    print('from addUserDetails accountDetails is ${accountDetails}');
     return await _firestore
-        .collection("users")
-        .doc(await authRepo.getUid())
-        // .collection("account")
-        // .document("details")
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
         .set(accountDetails.toJson());
   }
 
-  Future<void> addUserAddress(Address address) async {
+  Future updateCustomerField(Map<String, dynamic> field, String id) async {
+    _firestore
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc(id)
+        .update(field);
+  }
+
+  Future<void> addOrEditUserAddress(Address address) async {
     return await _firestore
-        .collection("users")
-        .doc(await authRepo.getUid())
-        // .collection("account")
-        // .document("details")
-        .update({
-      'addresses': FieldValue.arrayUnion([address.toJson()])
-    });
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
+        .collection('addresses')
+        .doc(address.id)
+        .set(address.toJson());
   }
 
   Future<AccountDetails> fetchUserDetails() async {
     return AccountDetails.fromDocument(await _firestore
-        .collection("users")
-        .doc(await authRepo.getUid())
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
         // .collection("account")
         // .document("details")
         .get());
@@ -235,16 +463,18 @@ class FirestoreRepository {
 
   Stream<DocumentSnapshot> streamUserDetails(String uID) {
     return _firestore
-        .collection("users")
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
         .doc(uID)
-        // .collection("account")
-        // .document("details")
         .snapshots();
   }
 
   Stream<QuerySnapshot> cartStatusListen(String uID) {
     return _firestore
-        .collection("users")
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
         .doc(uID)
         .collection("cart")
         .snapshots();
@@ -258,28 +488,29 @@ class FirestoreRepository {
   //       .document(orderModel.orderId).collection('details').doc('details')
   //       .setData(orderModel.toJson());
   // }
+  // Future<void> placeOrder(OrderModel order) async {
+  //   final ordersRef = _firestore.collection("orders").doc(order.orderId).collection('details').doc(order.orderId);
+  //   await ordersRef.set(Map.from(order.toJson()));
+  // }
 
-  Future<void> placeOrder(OrderModel orderModel) async {
-    final orderRef = _firestore
-        .collection("users")
-        .doc(await authRepo.getUid())
-        .collection("orders")
-        .doc(orderModel.orderId);
-    final jsonOrderModel = orderModel.toJson();
+  Future<void> placeOrder(OrderModel order) async {
+    final ordersRef = _firestore.collection("orders").doc(order.orderId);
 
-    await orderRef
+    await ordersRef
         .collection('details')
-        .doc('details')
-        .set(Map.from(jsonOrderModel));
+        .doc(order.orderId)
+        .set(Map.from(order.toJson()));
 
-    await orderRef
-        .set(BasicOrderModel.fromJsonOrderModelToJson(jsonOrderModel));
+    await ordersRef
+        .set(BasicOrderModel.fromJsonOrderModelToJson(order.toJson()));
   }
 
   Future<void> emptyCart() async {
     return await _firestore
-        .collection("users")
-        .doc(await authRepo.getUid())
+        .collection("customers")
+        .doc('details')
+        .collection('customers')
+        .doc((await _firebaseRepo.getCurrentUser())!.uid)
         .collection("cart")
         .get()
         .then((snapshot) {
@@ -287,6 +518,15 @@ class FirestoreRepository {
         doc.reference.delete();
       }
     });
+  }
+
+  Future<List<QueryDocumentSnapshot>> fetchBanners() async {
+    final docs = (await _firestore
+            .collection('banners')
+            .where('is_opened', isEqualTo: true)
+            .get())
+        .docs;
+    return docs;
   }
 
   // Future<void> addProductToDataBase(
@@ -408,12 +648,7 @@ class FirestoreRepository {
   // }
 
   Future fetchMainCategories() async {
-    // List categories = [];
-    QuerySnapshot data =
-        await _firestore.collection('mainCategories').get();
-    // data.documents.forEach((doc) {
-    //   categories.add(MainCategoryModel.fromJson(doc));
-    // });
+    QuerySnapshot data = await _firestore.collection('mainCategories').get();
     return data.docs;
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:math' as math show sin, pi;
 
+import 'package:baqal/src/res/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DotProgressIndicator extends StatefulWidget {
@@ -11,7 +12,7 @@ class DotProgressIndicator extends StatefulWidget {
 
   const DotProgressIndicator({
     Key? key,
-    this.color,
+    this.color = Colors.white,
     this.size = 48.0 / 2,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1400),

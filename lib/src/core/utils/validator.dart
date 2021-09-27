@@ -125,12 +125,21 @@ class Validator {
     return null;
   }
 
-  String ?validateText(String value, String text) {
+  String ?validateRequiredText(String value, String text) {
     var pattern = r'(^[a-zA-Z ]*$)';
     var regExp = new RegExp(pattern);
     if (value.isEmpty) {
       return "$text is Required";
     } else if (!regExp.hasMatch(value.trim())) {
+      return "$text must be a-z and A-Z";
+    }
+    return null;
+  }
+
+  String ?validateNotRequiredText(String value, String text) {
+    var pattern = r'(^[a-zA-Z ]*$)';
+    var regExp = new RegExp(pattern);
+    if (!regExp.hasMatch(value.trim())) {
       return "$text must be a-z and A-Z";
     }
     return null;

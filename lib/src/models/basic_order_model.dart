@@ -1,4 +1,3 @@
-import 'package:baqal/src/models/order_model.dart';
 
 class BasicOrderModel {
 late String orderId;
@@ -22,7 +21,7 @@ late String image;
         total: json['total'] as num,
         orderStatus: json['order_status'] as String,
         orderedAt: json['ordered_at'] as String,
-        orderNumber: json['orderNumber']);
+        orderNumber: json['order_number']);
   }
 
 static fromJsonOrderModelToJson(orderModel) {
@@ -31,9 +30,9 @@ static fromJsonOrderModelToJson(orderModel) {
     data['total'] = orderModel['total'];
     data['order_status'] = orderModel['order_status'];
     data['ordered_at'] = orderModel['ordered_at'];
-    data['orderNumber'] = orderModel['orderNumber'];
+    data['order_number'] = orderModel['order_number'];
     data['image'] = orderModel['order_items'][0]['image'];
-    data['userId'] = orderModel['userId'];
+    data['customer_id'] = orderModel['customer_id'];
     return data;
   }
 
@@ -43,7 +42,7 @@ static fromJsonOrderModelToJson(orderModel) {
     data['total'] = this.total;
     data['order_status'] = this.orderStatus;
     data['ordered_at'] = this.orderedAt;
-    data['orderNumber'] = this.orderNumber;
+    data['order_number'] = this.orderNumber;
 
     return data;
   }

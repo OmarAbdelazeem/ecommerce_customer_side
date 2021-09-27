@@ -1,11 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'auth_state.freezed.dart';
 
 @freezed
 abstract class AuthState with _$AuthState {
-  const factory AuthState.idle() = Idle;
 
+  const factory AuthState.idle() = Idle;
   const factory AuthState.codeCountDown(String value) = CodeCountDown;
 
   const factory AuthState.onButtonEnabled() = ButtonEnabled;
@@ -30,7 +29,6 @@ abstract class AuthState with _$AuthState {
 
   const factory AuthState.loginPhoneSuccessFull() = LoginPhoneSuccessfull;
 
-  const factory AuthState.loginEmailSuccessFull() = LoginEmailSuccessfull;
 
   const factory AuthState.loggedInUser() = LoggedInUser;
 

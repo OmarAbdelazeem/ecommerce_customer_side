@@ -1,3 +1,5 @@
+import 'package:baqal/src/di/app_injector.dart';
+import 'package:baqal/src/notifiers/language_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:baqal/src/notifiers/cart_status_provider.dart';
 import 'package:baqal/src/notifiers/provider_notifier.dart';
@@ -8,6 +10,7 @@ import 'package:baqal/src/res/text_styles.dart';
 class CommonViewCartOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final languageProvider = getItInstance<LanguageProvider>();
     return ProviderNotifier<CartStatusProvider>(
       child: (CartStatusProvider value) {
         return   AnimatedCrossFade(
@@ -24,7 +27,7 @@ class CommonViewCartOverlay extends StatelessWidget {
               children: <Widget>[
                 Text(
                   "${value.noOfItemsInCart} item${value.noOfItemsInCart > 1 ? "s" : ""} | EGP${value.priceInCart}",
-                  style: AppTextStyles.medium16White,
+                  style: AppTextStyles.normalText,
                 ),
                 SizedBox(
                   width: 10,
@@ -40,8 +43,8 @@ class CommonViewCartOverlay extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        StringsConstants.viewCart,
-                        style: AppTextStyles.medium16White,
+                        languageProvider.getTranslated(context, StringsConstants.viewCart)!,
+                        style: AppTextStyles.normalText,
                       ),
                     ],
                   ),

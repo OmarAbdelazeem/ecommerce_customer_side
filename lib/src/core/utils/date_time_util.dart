@@ -11,13 +11,15 @@ String formatCurrentDateTime() {
   return formattedDate;
 }
 
-String getTimeFromTimeStamp(String timestamp) {
+String getTimeFromTimeStamp(String timestamp, bool isEnglish) {
   try {
     var dateTime =
         DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp) * 1000);
 
     var day = dateTime.day;
-    var month = getMonthFromMonthNumber(dateTime.month);
+    var month = getMonthName(
+      dateTime.month,
+    );
     var year = dateTime.year;
 
     return "$day $month $year";
@@ -26,56 +28,90 @@ String getTimeFromTimeStamp(String timestamp) {
   }
 }
 
-getOrderedTime(String dateTime) {
-  String getTime(DateTime dateTime) {
-    return "${dateTime.hour > 12 ? dateTime.hour - 12 : dateTime.hour}:${dateTime.minute} ${dateTime.hour > 12 ? "PM" : "AM"}";
-  }
-
+getOrderedTime(String dateTime, {bool isEnglish = true}) {
   DateTime dateT = DateTime.parse(dateTime);
-  return "${getMonthFromMonthNumber(dateT.month)} ${dateT.day} , ${dateT.year} at ${getTime(dateT)}";
+  if (isEnglish)
+    return "${getMonthName(dateT.month)} ${dateT.day} , ${dateT.year} at ${_getTime(dateT)}";
+  else
+    return "${getMonthName(dateT.month, isEnglishLanguage: isEnglish = false)} ${dateT.day} , ${dateT.year} في ${_getTime(dateT, isEnglishLanguage: false)}";
 }
 
-String getMonthFromMonthNumber(int month) {
+String _getTime(DateTime dateTime, {bool isEnglishLanguage = true}) {
+  if (isEnglishLanguage)
+    return "${dateTime.hour > 12 ? dateTime.hour - 12 : dateTime.hour}:${dateTime.minute} ${dateTime.hour > 12 ? "PM" : "AM"}";
+  else
+    return "${dateTime.hour > 12 ? dateTime.hour - 12 : dateTime.hour}:${dateTime.minute} ${dateTime.hour > 12 ? "مساء" : "صباحا"}";
+}
+
+String getMonthName(int month, {bool isEnglishLanguage = true}) {
+  const List englishMonths = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "November",
+    "December"
+  ];
+  const List arabicMonths = [
+    "يناير",
+    "فبراير",
+    "مارس",
+    "ابريل",
+    "مايو",
+    "يونيو",
+    "يوليو",
+    "اغسطس",
+    "سبتمبر",
+    "نوفمبر",
+    "ديسمبر"
+  ];
+
+  final List temp = isEnglishLanguage ? englishMonths : arabicMonths;
+
   switch (month) {
     case 1:
-      return "January";
-      break;
+      return temp[0];
+
     case 2:
-      return "February";
-      break;
+      return temp[1];
+
     case 3:
-      return "March";
-      break;
+      return temp[2];
+
     case 4:
-      return "April";
-      break;
+      return temp[3];
+
     case 5:
-      return "May";
-      break;
+      return temp[4];
+
     case 6:
-      return "June";
-      break;
+      return temp[5];
+
     case 7:
-      return "July";
-      break;
+      return temp[6];
+
     case 8:
-      return "August";
-      break;
+      return temp[7];
+
     case 9:
-      return "September";
-      break;
+      return temp[8];
+
     case 10:
-      return "October";
-      break;
+      return temp[9];
+
     case 11:
-      return "November";
-      break;
+      return temp[10];
+
     case 12:
-      return "December";
-      break;
+      return temp[11];
+
     default:
-      return "January";
-      break;
+      return temp[0];
   }
 }
 

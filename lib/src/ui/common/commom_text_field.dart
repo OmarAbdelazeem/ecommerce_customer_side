@@ -1,3 +1,5 @@
+import 'package:baqal/src/di/app_injector.dart';
+import 'package:baqal/src/notifiers/language_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:baqal/src/res/app_colors.dart';
@@ -14,6 +16,7 @@ class CustomTextField extends StatefulWidget {
   final String? errorText;
   final bool obscureText;
   final bool? isEnabled;
+  final Widget? inputDecorationIcon;
   final TextCapitalization? textCapitalization;
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
@@ -29,7 +32,7 @@ class CustomTextField extends StatefulWidget {
   final bool isValidatorRequired;
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
-  final BuildContext ? context;
+  final BuildContext? context;
   final Color? fillColor;
   final bool autoFocus;
   final TextInputAction? textInputAction;
@@ -62,8 +65,9 @@ class CustomTextField extends StatefulWidget {
     this.initialValue,
     this.isValidatorRequired = true,
     this.focusNode,
+    this.inputDecorationIcon,
     this.nextFocusNode,
-     this.context,
+    this.context,
     this.textInputAction,
     this.autoFocus = false,
     this.key,
@@ -90,6 +94,8 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  final languageProvider = getItInstance<LanguageProvider>();
+
   void _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
@@ -110,7 +116,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
         enabled: widget.isEnabled,
         key: widget.key,
         autofocus: widget.autoFocus,
-        textAlign: TextAlign.left,
+        textAlign:
+            languageProvider.isEnglish ? TextAlign.left : TextAlign.right,
         showCursor: true,
         focusNode: widget.focusNode,
         textInputAction: widget.textInputAction,
@@ -119,7 +126,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
         maxLength: widget.maxLength,
         maxLines: widget.maxLines,
         textCapitalization: TextCapitalization.words,
-        initialValue: widget.initialValue,
         keyboardType: widget.keyboardType,
         obscureText: widget.obscureText,
         validator: widget.isValidatorRequired
@@ -139,6 +145,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   widget.context!, widget.focusNode!, widget.nextFocusNode!);
             },
         decoration: InputDecoration(
+          icon: widget.inputDecorationIcon,
           contentPadding: widget.contentPadding != null
               ? EdgeInsets.symmetric(
                   horizontal: widget.contentPadding!, vertical: 2)

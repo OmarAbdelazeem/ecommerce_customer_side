@@ -1,11 +1,12 @@
-import 'package:baqal/src/core/navigation.dart';
 import 'package:baqal/src/di/app_injector.dart';
-import 'package:baqal/src/notifiers/navigation_provider.dart';
+import 'package:baqal/src/routes/router_utils.dart';
+import 'package:baqal/src/routes/routes_constants.dart';
 import 'package:baqal/src/ui/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'common_button.dart';
 
 class SignInAndRegister extends StatelessWidget {
+  final _routerUtils = getItInstance<RouterUtils>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,9 +25,10 @@ class SignInAndRegister extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.9,
             title: 'Log In',
             onTap: () {
-              final navigationProvider = getItInstance<NavigationProvider>();
-              navigationProvider.setIsFromMainHomeScreen = true;
-              Navigation.push(context , LoginScreen());
+              // final navigationProvider = getItInstance<NavigationProvider>();
+              // navigationProvider.setIsFromMainHomeScreen = true;
+              _routerUtils.pushNamedRoot(context, Routes.loginScreen);
+              // Navigator.pushNamed(context , Routes.loginScreen);
             },
           ),
           SizedBox(
@@ -36,7 +38,7 @@ class SignInAndRegister extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.9,
             title: 'Register',
             onTap: () {
-              Navigation.push(context , LoginScreen());
+              _routerUtils.pushNamedRoot(context, Routes.loginScreen);
             },
           ),
         ],

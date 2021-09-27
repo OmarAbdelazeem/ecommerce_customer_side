@@ -21,9 +21,9 @@ class _$ProductSearchStateTearOff {
     return const Idle();
   }
 
-  ProductList productList(List<ProductModel> productList) {
-    return ProductList(
-      productList,
+  Loaded loaded(List<ProductModel> products) {
+    return Loaded(
+      products,
     );
   }
 
@@ -31,8 +31,10 @@ class _$ProductSearchStateTearOff {
     return const Loading();
   }
 
-  Error error() {
-    return const Error();
+  Error error(String error) {
+    return Error(
+      error,
+    );
   }
 }
 
@@ -44,32 +46,32 @@ mixin _$ProductSearchState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(List<ProductModel> productList) productList,
+    required TResult Function(List<ProductModel> products) loaded,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(ProductList value) productList,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) =>
@@ -77,7 +79,7 @@ mixin _$ProductSearchState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) =>
@@ -85,7 +87,7 @@ mixin _$ProductSearchState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -148,9 +150,9 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(List<ProductModel> productList) productList,
+    required TResult Function(List<ProductModel> products) loaded,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(String error) error,
   }) {
     return idle();
   }
@@ -159,9 +161,9 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
   }) {
     return idle?.call();
   }
@@ -170,9 +172,9 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (idle != null) {
@@ -185,7 +187,7 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(ProductList value) productList,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -196,7 +198,7 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) {
@@ -207,7 +209,7 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -224,32 +226,29 @@ abstract class Idle implements ProductSearchState {
 }
 
 /// @nodoc
-abstract class $ProductListCopyWith<$Res> {
-  factory $ProductListCopyWith(
-          ProductList value, $Res Function(ProductList) then) =
-      _$ProductListCopyWithImpl<$Res>;
-  $Res call({List<ProductModel> productList});
+abstract class $LoadedCopyWith<$Res> {
+  factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
+      _$LoadedCopyWithImpl<$Res>;
+  $Res call({List<ProductModel> products});
 }
 
 /// @nodoc
-class _$ProductListCopyWithImpl<$Res>
-    extends _$ProductSearchStateCopyWithImpl<$Res>
-    implements $ProductListCopyWith<$Res> {
-  _$ProductListCopyWithImpl(
-      ProductList _value, $Res Function(ProductList) _then)
-      : super(_value, (v) => _then(v as ProductList));
+class _$LoadedCopyWithImpl<$Res> extends _$ProductSearchStateCopyWithImpl<$Res>
+    implements $LoadedCopyWith<$Res> {
+  _$LoadedCopyWithImpl(Loaded _value, $Res Function(Loaded) _then)
+      : super(_value, (v) => _then(v as Loaded));
 
   @override
-  ProductList get _value => super._value as ProductList;
+  Loaded get _value => super._value as Loaded;
 
   @override
   $Res call({
-    Object? productList = freezed,
+    Object? products = freezed,
   }) {
-    return _then(ProductList(
-      productList == freezed
-          ? _value.productList
-          : productList // ignore: cast_nullable_to_non_nullable
+    return _then(Loaded(
+      products == freezed
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
     ));
   }
@@ -257,68 +256,68 @@ class _$ProductListCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProductList implements ProductList {
-  const _$ProductList(this.productList);
+class _$Loaded implements Loaded {
+  const _$Loaded(this.products);
 
   @override
-  final List<ProductModel> productList;
+  final List<ProductModel> products;
 
   @override
   String toString() {
-    return 'ProductSearchState.productList(productList: $productList)';
+    return 'ProductSearchState.loaded(products: $products)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is ProductList &&
-            (identical(other.productList, productList) ||
+        (other is Loaded &&
+            (identical(other.products, products) ||
                 const DeepCollectionEquality()
-                    .equals(other.productList, productList)));
+                    .equals(other.products, products)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(productList);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(products);
 
   @JsonKey(ignore: true)
   @override
-  $ProductListCopyWith<ProductList> get copyWith =>
-      _$ProductListCopyWithImpl<ProductList>(this, _$identity);
+  $LoadedCopyWith<Loaded> get copyWith =>
+      _$LoadedCopyWithImpl<Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(List<ProductModel> productList) productList,
+    required TResult Function(List<ProductModel> products) loaded,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(String error) error,
   }) {
-    return productList(this.productList);
+    return loaded(products);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
   }) {
-    return productList?.call(this.productList);
+    return loaded?.call(products);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (productList != null) {
-      return productList(this.productList);
+    if (loaded != null) {
+      return loaded(products);
     }
     return orElse();
   }
@@ -327,47 +326,46 @@ class _$ProductList implements ProductList {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(ProductList value) productList,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
-    return productList(this);
+    return loaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) {
-    return productList?.call(this);
+    return loaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
-    if (productList != null) {
-      return productList(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class ProductList implements ProductSearchState {
-  const factory ProductList(List<ProductModel> productList) = _$ProductList;
+abstract class Loaded implements ProductSearchState {
+  const factory Loaded(List<ProductModel> products) = _$Loaded;
 
-  List<ProductModel> get productList => throw _privateConstructorUsedError;
+  List<ProductModel> get products => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ProductListCopyWith<ProductList> get copyWith =>
-      throw _privateConstructorUsedError;
+  $LoadedCopyWith<Loaded> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -408,9 +406,9 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(List<ProductModel> productList) productList,
+    required TResult Function(List<ProductModel> products) loaded,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(String error) error,
   }) {
     return loading();
   }
@@ -419,9 +417,9 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
   }) {
     return loading?.call();
   }
@@ -430,9 +428,9 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -445,7 +443,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(ProductList value) productList,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -456,7 +454,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) {
@@ -467,7 +465,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -487,6 +485,7 @@ abstract class Loading implements ProductSearchState {
 abstract class $ErrorCopyWith<$Res> {
   factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
       _$ErrorCopyWithImpl<$Res>;
+  $Res call({String error});
 }
 
 /// @nodoc
@@ -497,59 +496,83 @@ class _$ErrorCopyWithImpl<$Res> extends _$ProductSearchStateCopyWithImpl<$Res>
 
   @override
   Error get _value => super._value as Error;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+  }) {
+    return _then(Error(
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$Error implements Error {
-  const _$Error();
+  const _$Error(this.error);
+
+  @override
+  final String error;
 
   @override
   String toString() {
-    return 'ProductSearchState.error()';
+    return 'ProductSearchState.error(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Error);
+    return identical(this, other) ||
+        (other is Error &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+
+  @JsonKey(ignore: true)
+  @override
+  $ErrorCopyWith<Error> get copyWith =>
+      _$ErrorCopyWithImpl<Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function(List<ProductModel> productList) productList,
+    required TResult Function(List<ProductModel> products) loaded,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(String error) error,
   }) {
-    return error();
+    return error(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
   }) {
-    return error?.call();
+    return error?.call(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function(List<ProductModel> productList)? productList,
+    TResult Function(List<ProductModel> products)? loaded,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(this.error);
     }
     return orElse();
   }
@@ -558,7 +581,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(ProductList value) productList,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -569,7 +592,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) {
@@ -580,7 +603,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(ProductList value)? productList,
+    TResult Function(Loaded value)? loaded,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -593,5 +616,9 @@ class _$Error implements Error {
 }
 
 abstract class Error implements ProductSearchState {
-  const factory Error() = _$Error;
+  const factory Error(String error) = _$Error;
+
+  String get error => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ErrorCopyWith<Error> get copyWith => throw _privateConstructorUsedError;
 }

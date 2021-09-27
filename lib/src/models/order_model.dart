@@ -1,60 +1,49 @@
-import 'package:baqal/src/models/account_details_model.dart';
+import 'package:baqal/src/models/name_field.dart';
+
+import 'account_details_model.dart';
 
 class OrderModel {
-  String? orderId;
-  int? orderNumber;
-  num ?total;
-  String? userId;
-  List<OrderItem?> ? orderItems;
+  late String orderId;
+  late int? orderNumber;
+  late num total;
+  String customerId;
+  List<OrderItem?>? orderItems;
   String? orderedAt;
-  String ?orderStatus;
-  // String currency;
-  // String paymentId;
-  // String signature;
-  Address? orderAddress;
+  String? orderStatus;
+  late Address orderAddress;
 
   OrderModel(
-      { this.orderId,
-          this.total,
-         this.orderItems,
-         this.orderedAt,
-         this.orderStatus,
-          this.userId,
-          this.orderNumber,
-      // this.currency,
-      // this.paymentId,
-      // this.signature,
-         this.orderAddress});
+      {required this.orderId,
+      required this.total,
+      required this.orderItems,
+      this.orderedAt,
+      this.orderStatus,
+      required this.customerId,
+      this.orderNumber,
+      required this.orderAddress});
 
   factory OrderModel.fromJson(json) {
     return OrderModel(
-        orderId: json['order_id'] as String,
+        orderId: json['order_id'],
         total: json['total'] as num,
         orderStatus: json['order_status'] as String,
         orderedAt: json['ordered_at'] as String,
-        userId: json['userId'],
-        orderNumber : json['orderNumber'],
-        // currency: json['currency'] as String,
-        // paymentId: json['payment_id'] as String,
-        // signature: json['signature'] as String,
+        orderNumber: json['order_number'],
+        customerId: json['customer_id'],
         orderAddress: Address.fromDocument(json['order_address']),
         orderItems: (json['order_items'] as List)
             .map((e) => e == null ? null : OrderItem.fromJson(e))
-            .toList()
-        );
+            .toList());
   }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'order_id': orderId,
         'total': total,
         'ordered_at': DateTime.now().toIso8601String(),
         "order_status": "Processing",
-        'userId': userId,
-        'orderNumber':orderNumber,
-        // "currency": orderItems[0].currency,
-        // "payment_id": paymentId,
-        // "signature": signature,
-        "order_address": orderAddress!.toJson(),
+        "order_address": orderAddress.toJson(),
+        'order_id': orderId,
+        'order_number': orderNumber,
+        'customer_id': customerId,
         'order_items': List<dynamic>.from(orderItems!.map((x) => x!.toJson())),
       };
 
@@ -65,31 +54,28 @@ class OrderModel {
 }
 
 class OrderItem {
-  String productId;
-  String image;
-  String name;
-  // String unit;
-  // String currency;
-  num price;
-  num noOfItems;
+  late String productId;
+  late String image;
+  late NameField name;
+  late num price;
+  late num noOfItems;
+  late String customerId;
 
   OrderItem(
       {required this.productId,
-        required this.image,
-        required this.name,
-      // this.unit,
-      // this.currency,
-        required this.price,
-        required this.noOfItems});
+      required this.image,
+      required this.price,
+      required this.name,
+      required this.customerId,
+      required this.noOfItems});
 
   factory OrderItem.fromJson(json) {
     return OrderItem(
       productId: json['product_id'] as String,
       image: json['image'] as String,
-      name: json['name'] as String,
-      // unit: json['unit'] as String,
-      // currency: json['currency'] as String,
       price: json['price'] as num,
+      customerId: json['customer_id'],
+      name: NameField.fromJson(json['name']),
       noOfItems: json['no_of_items'] as num,
     );
   }
@@ -97,10 +83,9 @@ class OrderItem {
   Map<String, dynamic> toJson() => <String, dynamic>{
         'product_id': productId,
         'image': image,
-        'name': name,
-        // 'unit': unit,
-        // 'currency': currency,
+        'name': name.toJson(),
         'price': price,
+    'customer_id':customerId,
         'no_of_items': noOfItems,
       };
 

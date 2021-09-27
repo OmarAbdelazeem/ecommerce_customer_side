@@ -21,12 +21,12 @@ class _$MainCategoriesStateTearOff {
     return const Idle();
   }
 
-  CategoriesLoading categoriesLoading() {
-    return const CategoriesLoading();
+  Loading loading() {
+    return const Loading();
   }
 
-  CategoriesLoaded categoriesLoaded(List<MainCategoryModel> mainCategories) {
-    return CategoriesLoaded(
+  Loaded loaded(List<MainCategoryModel> mainCategories) {
+    return Loaded(
       mainCategories,
     );
   }
@@ -59,9 +59,8 @@ mixin _$MainCategoriesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() categoriesLoading,
-    required TResult Function(List<MainCategoryModel> mainCategories)
-        categoriesLoaded,
+    required TResult Function() loading,
+    required TResult Function(List<MainCategoryModel> mainCategories) loaded,
     required TResult Function(MainCategoryModel mainCategoryModel)
         mainCategorySelected,
     required TResult Function(SubCategoryModel subCategoryModel)
@@ -72,8 +71,8 @@ mixin _$MainCategoriesState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -82,8 +81,8 @@ mixin _$MainCategoriesState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -93,8 +92,8 @@ mixin _$MainCategoriesState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesLoaded value) categoriesLoaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(MainCategorySelected value) mainCategorySelected,
     required TResult Function(SubCategorySelected value) subCategorySelected,
     required TResult Function(Error value) error,
@@ -103,8 +102,8 @@ mixin _$MainCategoriesState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
@@ -113,8 +112,8 @@ mixin _$MainCategoriesState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
@@ -178,9 +177,8 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() categoriesLoading,
-    required TResult Function(List<MainCategoryModel> mainCategories)
-        categoriesLoaded,
+    required TResult Function() loading,
+    required TResult Function(List<MainCategoryModel> mainCategories) loaded,
     required TResult Function(MainCategoryModel mainCategoryModel)
         mainCategorySelected,
     required TResult Function(SubCategoryModel subCategoryModel)
@@ -194,8 +192,8 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -207,8 +205,8 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -224,8 +222,8 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesLoaded value) categoriesLoaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(MainCategorySelected value) mainCategorySelected,
     required TResult Function(SubCategorySelected value) subCategorySelected,
     required TResult Function(Error value) error,
@@ -237,8 +235,8 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
@@ -250,8 +248,8 @@ class _$Idle implements Idle {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
@@ -269,37 +267,35 @@ abstract class Idle implements MainCategoriesState {
 }
 
 /// @nodoc
-abstract class $CategoriesLoadingCopyWith<$Res> {
-  factory $CategoriesLoadingCopyWith(
-          CategoriesLoading value, $Res Function(CategoriesLoading) then) =
-      _$CategoriesLoadingCopyWithImpl<$Res>;
+abstract class $LoadingCopyWith<$Res> {
+  factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
+      _$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$CategoriesLoadingCopyWithImpl<$Res>
+class _$LoadingCopyWithImpl<$Res>
     extends _$MainCategoriesStateCopyWithImpl<$Res>
-    implements $CategoriesLoadingCopyWith<$Res> {
-  _$CategoriesLoadingCopyWithImpl(
-      CategoriesLoading _value, $Res Function(CategoriesLoading) _then)
-      : super(_value, (v) => _then(v as CategoriesLoading));
+    implements $LoadingCopyWith<$Res> {
+  _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
+      : super(_value, (v) => _then(v as Loading));
 
   @override
-  CategoriesLoading get _value => super._value as CategoriesLoading;
+  Loading get _value => super._value as Loading;
 }
 
 /// @nodoc
 
-class _$CategoriesLoading implements CategoriesLoading {
-  const _$CategoriesLoading();
+class _$Loading implements Loading {
+  const _$Loading();
 
   @override
   String toString() {
-    return 'MainCategoriesState.categoriesLoading()';
+    return 'MainCategoriesState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is CategoriesLoading);
+    return identical(this, other) || (other is Loading);
   }
 
   @override
@@ -309,44 +305,43 @@ class _$CategoriesLoading implements CategoriesLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() categoriesLoading,
-    required TResult Function(List<MainCategoryModel> mainCategories)
-        categoriesLoaded,
+    required TResult Function() loading,
+    required TResult Function(List<MainCategoryModel> mainCategories) loaded,
     required TResult Function(MainCategoryModel mainCategoryModel)
         mainCategorySelected,
     required TResult Function(SubCategoryModel subCategoryModel)
         subCategorySelected,
     required TResult Function(String error) error,
   }) {
-    return categoriesLoading();
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
   }) {
-    return categoriesLoading?.call();
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (categoriesLoading != null) {
-      return categoriesLoading();
+    if (loading != null) {
+      return loading();
     }
     return orElse();
   }
@@ -355,74 +350,71 @@ class _$CategoriesLoading implements CategoriesLoading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesLoaded value) categoriesLoaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(MainCategorySelected value) mainCategorySelected,
     required TResult Function(SubCategorySelected value) subCategorySelected,
     required TResult Function(Error value) error,
   }) {
-    return categoriesLoading(this);
+    return loading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
   }) {
-    return categoriesLoading?.call(this);
+    return loading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
-    if (categoriesLoading != null) {
-      return categoriesLoading(this);
+    if (loading != null) {
+      return loading(this);
     }
     return orElse();
   }
 }
 
-abstract class CategoriesLoading implements MainCategoriesState {
-  const factory CategoriesLoading() = _$CategoriesLoading;
+abstract class Loading implements MainCategoriesState {
+  const factory Loading() = _$Loading;
 }
 
 /// @nodoc
-abstract class $CategoriesLoadedCopyWith<$Res> {
-  factory $CategoriesLoadedCopyWith(
-          CategoriesLoaded value, $Res Function(CategoriesLoaded) then) =
-      _$CategoriesLoadedCopyWithImpl<$Res>;
+abstract class $LoadedCopyWith<$Res> {
+  factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
+      _$LoadedCopyWithImpl<$Res>;
   $Res call({List<MainCategoryModel> mainCategories});
 }
 
 /// @nodoc
-class _$CategoriesLoadedCopyWithImpl<$Res>
-    extends _$MainCategoriesStateCopyWithImpl<$Res>
-    implements $CategoriesLoadedCopyWith<$Res> {
-  _$CategoriesLoadedCopyWithImpl(
-      CategoriesLoaded _value, $Res Function(CategoriesLoaded) _then)
-      : super(_value, (v) => _then(v as CategoriesLoaded));
+class _$LoadedCopyWithImpl<$Res> extends _$MainCategoriesStateCopyWithImpl<$Res>
+    implements $LoadedCopyWith<$Res> {
+  _$LoadedCopyWithImpl(Loaded _value, $Res Function(Loaded) _then)
+      : super(_value, (v) => _then(v as Loaded));
 
   @override
-  CategoriesLoaded get _value => super._value as CategoriesLoaded;
+  Loaded get _value => super._value as Loaded;
 
   @override
   $Res call({
     Object? mainCategories = freezed,
   }) {
-    return _then(CategoriesLoaded(
+    return _then(Loaded(
       mainCategories == freezed
           ? _value.mainCategories
           : mainCategories // ignore: cast_nullable_to_non_nullable
@@ -433,21 +425,21 @@ class _$CategoriesLoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CategoriesLoaded implements CategoriesLoaded {
-  const _$CategoriesLoaded(this.mainCategories);
+class _$Loaded implements Loaded {
+  const _$Loaded(this.mainCategories);
 
   @override
   final List<MainCategoryModel> mainCategories;
 
   @override
   String toString() {
-    return 'MainCategoriesState.categoriesLoaded(mainCategories: $mainCategories)';
+    return 'MainCategoriesState.loaded(mainCategories: $mainCategories)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is CategoriesLoaded &&
+        (other is Loaded &&
             (identical(other.mainCategories, mainCategories) ||
                 const DeepCollectionEquality()
                     .equals(other.mainCategories, mainCategories)));
@@ -460,51 +452,50 @@ class _$CategoriesLoaded implements CategoriesLoaded {
 
   @JsonKey(ignore: true)
   @override
-  $CategoriesLoadedCopyWith<CategoriesLoaded> get copyWith =>
-      _$CategoriesLoadedCopyWithImpl<CategoriesLoaded>(this, _$identity);
+  $LoadedCopyWith<Loaded> get copyWith =>
+      _$LoadedCopyWithImpl<Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() categoriesLoading,
-    required TResult Function(List<MainCategoryModel> mainCategories)
-        categoriesLoaded,
+    required TResult Function() loading,
+    required TResult Function(List<MainCategoryModel> mainCategories) loaded,
     required TResult Function(MainCategoryModel mainCategoryModel)
         mainCategorySelected,
     required TResult Function(SubCategoryModel subCategoryModel)
         subCategorySelected,
     required TResult Function(String error) error,
   }) {
-    return categoriesLoaded(mainCategories);
+    return loaded(mainCategories);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
   }) {
-    return categoriesLoaded?.call(mainCategories);
+    return loaded?.call(mainCategories);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (categoriesLoaded != null) {
-      return categoriesLoaded(mainCategories);
+    if (loaded != null) {
+      return loaded(mainCategories);
     }
     return orElse();
   }
@@ -513,55 +504,53 @@ class _$CategoriesLoaded implements CategoriesLoaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesLoaded value) categoriesLoaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(MainCategorySelected value) mainCategorySelected,
     required TResult Function(SubCategorySelected value) subCategorySelected,
     required TResult Function(Error value) error,
   }) {
-    return categoriesLoaded(this);
+    return loaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
   }) {
-    return categoriesLoaded?.call(this);
+    return loaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
-    if (categoriesLoaded != null) {
-      return categoriesLoaded(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class CategoriesLoaded implements MainCategoriesState {
-  const factory CategoriesLoaded(List<MainCategoryModel> mainCategories) =
-      _$CategoriesLoaded;
+abstract class Loaded implements MainCategoriesState {
+  const factory Loaded(List<MainCategoryModel> mainCategories) = _$Loaded;
 
   List<MainCategoryModel> get mainCategories =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CategoriesLoadedCopyWith<CategoriesLoaded> get copyWith =>
-      throw _privateConstructorUsedError;
+  $LoadedCopyWith<Loaded> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -633,9 +622,8 @@ class _$MainCategorySelected implements MainCategorySelected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() categoriesLoading,
-    required TResult Function(List<MainCategoryModel> mainCategories)
-        categoriesLoaded,
+    required TResult Function() loading,
+    required TResult Function(List<MainCategoryModel> mainCategories) loaded,
     required TResult Function(MainCategoryModel mainCategoryModel)
         mainCategorySelected,
     required TResult Function(SubCategoryModel subCategoryModel)
@@ -649,8 +637,8 @@ class _$MainCategorySelected implements MainCategorySelected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -662,8 +650,8 @@ class _$MainCategorySelected implements MainCategorySelected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -679,8 +667,8 @@ class _$MainCategorySelected implements MainCategorySelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesLoaded value) categoriesLoaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(MainCategorySelected value) mainCategorySelected,
     required TResult Function(SubCategorySelected value) subCategorySelected,
     required TResult Function(Error value) error,
@@ -692,8 +680,8 @@ class _$MainCategorySelected implements MainCategorySelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
@@ -705,8 +693,8 @@ class _$MainCategorySelected implements MainCategorySelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
@@ -797,9 +785,8 @@ class _$SubCategorySelected implements SubCategorySelected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() categoriesLoading,
-    required TResult Function(List<MainCategoryModel> mainCategories)
-        categoriesLoaded,
+    required TResult Function() loading,
+    required TResult Function(List<MainCategoryModel> mainCategories) loaded,
     required TResult Function(MainCategoryModel mainCategoryModel)
         mainCategorySelected,
     required TResult Function(SubCategoryModel subCategoryModel)
@@ -813,8 +800,8 @@ class _$SubCategorySelected implements SubCategorySelected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -826,8 +813,8 @@ class _$SubCategorySelected implements SubCategorySelected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -843,8 +830,8 @@ class _$SubCategorySelected implements SubCategorySelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesLoaded value) categoriesLoaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(MainCategorySelected value) mainCategorySelected,
     required TResult Function(SubCategorySelected value) subCategorySelected,
     required TResult Function(Error value) error,
@@ -856,8 +843,8 @@ class _$SubCategorySelected implements SubCategorySelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
@@ -869,8 +856,8 @@ class _$SubCategorySelected implements SubCategorySelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
@@ -956,9 +943,8 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
-    required TResult Function() categoriesLoading,
-    required TResult Function(List<MainCategoryModel> mainCategories)
-        categoriesLoaded,
+    required TResult Function() loading,
+    required TResult Function(List<MainCategoryModel> mainCategories) loaded,
     required TResult Function(MainCategoryModel mainCategoryModel)
         mainCategorySelected,
     required TResult Function(SubCategoryModel subCategoryModel)
@@ -972,8 +958,8 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -985,8 +971,8 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
-    TResult Function()? categoriesLoading,
-    TResult Function(List<MainCategoryModel> mainCategories)? categoriesLoaded,
+    TResult Function()? loading,
+    TResult Function(List<MainCategoryModel> mainCategories)? loaded,
     TResult Function(MainCategoryModel mainCategoryModel)? mainCategorySelected,
     TResult Function(SubCategoryModel subCategoryModel)? subCategorySelected,
     TResult Function(String error)? error,
@@ -1002,8 +988,8 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Idle value) idle,
-    required TResult Function(CategoriesLoading value) categoriesLoading,
-    required TResult Function(CategoriesLoaded value) categoriesLoaded,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(MainCategorySelected value) mainCategorySelected,
     required TResult Function(SubCategorySelected value) subCategorySelected,
     required TResult Function(Error value) error,
@@ -1015,8 +1001,8 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,
@@ -1028,8 +1014,8 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Idle value)? idle,
-    TResult Function(CategoriesLoading value)? categoriesLoading,
-    TResult Function(CategoriesLoaded value)? categoriesLoaded,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(MainCategorySelected value)? mainCategorySelected,
     TResult Function(SubCategorySelected value)? subCategorySelected,
     TResult Function(Error value)? error,

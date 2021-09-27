@@ -1,93 +1,100 @@
+import 'package:baqal/src/models/name_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class ProductModel {
-  String productId;
-  String categoryId;
-  String image;
-  String name;
-  String description;
-  String category;
-  String section;
-  bool isTopProduct;
+// ignore: must_be_immutable
+class ProductModel extends Equatable {
+  late String productId;
+  late String? image;
+  late String? imageId;
+  late NameField name;
+  late NameField? description;
+  late NameField? subCategory;
+  late String date;
+  late num? basicQuantity;
+  late num? remainQuantity;
+  late num? numberOfSales;
+  late num price;
+  late num discountPrice;
+  late List categories;
+  late List banners;
 
-  bool isOnSale;
+  ProductModel({
+    required this.productId,
+    this.image,
+    this.imageId,
+    required this.name,
+    required this.subCategory,
+    required this.date,
+    required this.categories,
+    required this.numberOfSales,
+    required this.price,
+    required this.discountPrice,
+    required this.basicQuantity,
+    required this.remainQuantity,
+    this.description,
+  });
 
-  bool isSpecialOrder;
+  ProductModel.fromJson(json) {
+    productId = json['product_id'] as String;
+    image = json['image'] as String;
+    imageId = json['image_id'];
+    if (json['categories'] != null && json['categories'] != []) {
+      categories = (json['categories'] as List)
+          .map((e) => e == null ? null : NameField.fromJson(e))
+          .toList();
+    }
 
-  int basicQuantity;
-  int remainQuantity;
-  int soldQuantity;
-
-  num currentPrice = 0.0;
-  num discountPrice = 0.0;
-  bool isProductAvailable;
-
-  ProductModel(
-      {required this.productId,
-        required this.categoryId,
-        required this.image,
-        required this.name,
-        required this.section,
-        required this.category,
-        // @required this.categories,
-       this.isTopProduct = false,
-       this.isOnSale = false,
-       this.isSpecialOrder = false,
-       this.isProductAvailable = true,
-        required this.currentPrice,
-        required this.discountPrice,
-        required this.basicQuantity,
-        this.remainQuantity = 0,
-        this.soldQuantity = 0,
-        this.description = '',
-       });
-
-  factory ProductModel.fromJson(DocumentSnapshot json) {
-    return ProductModel(
-        productId: json['productId'] as String,
-        categoryId: json['categoryId'],
-        image: json['image'] as String,
-        name: json['name'] as String,
-        description: json['description'] as String,
-        section: json['section'],
-        category:json['category'],
-        // categories:
-        //     (json['section'] as List)?.map((e) => e as String)?.toList(),
-        isTopProduct: json['isTopProduct'],
-        isOnSale: json['isOnSale'],
-        isSpecialOrder: json['isSpecialOrder'],
-        isProductAvailable: json['isProductAvailable'] as bool,
-        currentPrice: json['currentPrice'] ,
-        discountPrice: json['discountPrice'] ,
-        basicQuantity: json['basicQuantity'] ,
-        remainQuantity: json['remainQuantity'] ,
-        soldQuantity: json['soldQuantity'] );
+    name = NameField.fromJson(Map.from(json['name']));
+    description = NameField.fromJson(json['description']);
+    subCategory = json['sub_category'] != null
+        ? NameField.fromJson(json['sub_category'])
+        : null;
+    date = json['date'];
+    numberOfSales = json['number_of_sales'];
+    price = json['price'];
+    discountPrice = json['discount_price'];
+    basicQuantity = json['basic_quantity'];
+    remainQuantity = json['remain_quantity'];
   }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-    'productId': productId,
-    'categoryId': categoryId,
+    'product_id': productId,
+    'categories': categories.map((e) => e.toJson()).toList(),
     'image': image,
-    'name': name,
-    'basicQuantity': basicQuantity,
-    'remainQuantity': remainQuantity,
-    'soldQuantity': soldQuantity,
-    'description': description,
-    'section': section,
-    'category': category,
-    'isTopProduct': isTopProduct,
-    'isOnSale': isOnSale,
-    'isSpecialOrder': isSpecialOrder,
-    'isProductAvailable': isProductAvailable,
-    'currentPrice': currentPrice ?? 0.0,
-    'discountPrice': discountPrice ?? 0.0,
+    'name': name.toJson(),
+    'image_id': imageId,
+    'date': date,
+    'banners': [],
+    'basic_quantity': basicQuantity,
+    'remain_quantity': remainQuantity,
+    'description': description != null ? description!.toJson() : null,
+    'number_of_sales': numberOfSales,
+    'sub_category': subCategory!.toJson(),
+    'price': price,
+    'discount_price': discountPrice == 0.0 ? price : discountPrice,
   };
 
   @override
   String toString() {
-    return 'ProductModel{productId: $productId, image: $image, name: $name,  section: $section,currentPrice: $currentPrice, discountPrice: $discountPrice}';
+    return 'ProductModel{product_id: $productId, image: $image,  section: $subCategory, current_price: $price, discount_price: $discountPrice}';
   }
 
 
+  @override
+  // TODO: implement props
+  List<Object> get props => [
+    productId,
+    image!,
+    name,
+    description!,
+    date,
+    date,
+    subCategory!,
+    basicQuantity!,
+    remainQuantity!,
+    price,
+    discountPrice,
+  ];
 }

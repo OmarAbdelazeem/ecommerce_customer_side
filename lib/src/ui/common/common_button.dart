@@ -7,29 +7,32 @@ class CommonButton extends StatelessWidget {
   final String? title;
   final VoidCallback? onTap;
   final TextStyle? textStyle;
-  final Color ?buttonColor;
+  final Color? buttonColor;
+  final Color? borderSideColor;
   final double? elevation;
   final double? width;
   final double? height;
   final double? fontSize;
-  final Color ?titleColor;
-  final FontWeight ?fontWeight;
+  final Color? titleColor;
+  final FontWeight? fontWeight;
   final bool hasForwardIcon;
-  final Icon ?leadingIcon;
+  final Icon? leadingIcon;
+
   // final bool hasLeadingIcon;
   final bool replaceWithIndicator;
   final bool isEnabled;
-  final TextAlign ?textAlign;
-  final EdgeInsets ?margin;
+  final TextAlign? textAlign;
+  final EdgeInsets? margin;
 
   const CommonButton(
-      {Key ?key,
+      {Key? key,
       required this.title,
       this.onTap,
       this.textStyle,
       this.buttonColor,
+        this.borderSideColor,
       this.titleColor,
-        this.elevation,
+      this.elevation,
       this.width,
       this.height,
       this.fontWeight,
@@ -45,7 +48,6 @@ class CommonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Widget buttonTitleWithLeadingIcon(
         {Icon? leadingIcon, required BuildContext context}) {
       return Row(
@@ -73,8 +75,13 @@ class CommonButton extends StatelessWidget {
       width: width,
       margin: margin,
       child: MaterialButton(
+
         disabledColor: AppColors.primaryColor.withOpacity(!isEnabled ? 0.5 : 1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: borderSideColor ?? buttonColor ??
+              AppColors.primaryColor.withOpacity(!isEnabled ? 0.5 : 1)),
+          borderRadius: BorderRadius.circular(10),
+        ),
         onPressed: (!replaceWithIndicator && isEnabled)
             ? () {
                 if (onTap != null) {
@@ -114,6 +121,4 @@ class CommonButton extends StatelessWidget {
       ),
     );
   }
-
-
 }

@@ -1,39 +1,43 @@
+import 'package:baqal/src/models/cart_model.dart';
+import 'package:baqal/src/notifiers/account_provider.dart';
+import 'package:baqal/src/notifiers/addresses_provider.dart';
 import 'package:baqal/src/repository/auth_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:baqal/src/bloc/place_order/place_order.dart';
 import 'package:baqal/src/core/utils/connectivity.dart';
 import 'package:baqal/src/di/app_injector.dart';
-import 'package:baqal/src/models/cartModel_model.dart';
 import 'package:baqal/src/models/order_model.dart';
-import 'package:baqal/src/notifiers/account_provider.dart';
 import 'package:baqal/src/notifiers/cart_status_provider.dart';
 import 'package:baqal/src/repository/firestore_repository.dart';
 import 'package:baqal/src/res/string_constants.dart';
 import 'place_order_state.dart';
 
 class PlaceOrderCubit extends Cubit<PlaceOrderState> {
-  var firestoreRepo = getItInstance<FirestoreRepository>();
-  var firebaseRep = getItInstance<FirebaseRepository>();
-  var accountProvider = getItInstance<AccountProvider>();
+  var _firestoreRepo = getItInstance<FirestoreRepository>();
+  var _accountProvider = getItInstance<AccountProvider>();
+  var _addressesProvider = getItInstance<AddressesProvider>();
+  MyConnectivity _connectivity = MyConnectivity.instance;
   late String orderId;
+
   PlaceOrderCubit() : super(PlaceOrderState.idle());
 
   placeOrder(
     CartStatusProvider cartItemStatus,
   ) async {
-    emit(PlaceOrderState.orderPlacedInProgress());
-    if (await ConnectionStatus.getInstance().checkConnection()) {
+    bool hasConnection = await _connectivity.checkInternetConnection();
+
+    if (hasConnection) {
+      emit(PlaceOrderState.loading());
       try {
-        await firestoreRepo
+        await _firestoreRepo
             .placeOrder(await _orderFromCartList(cartItemStatus));
-        await firestoreRepo.emptyCart();
+        await _firestoreRepo.emptyCart();
         emit(PlaceOrderState.orderSuccessfullyPlaced());
       } catch (e) {
-        emit(PlaceOrderState.orderNotPlaced(e.toString()));
+        emit(PlaceOrderState.error(e.toString()));
       }
     } else {
-      emit(PlaceOrderState.orderNotPlaced(StringsConstants.connectionNotAvailable));
+      emit(PlaceOrderState.error(StringsConstants.connectionNotAvailable));
     }
   }
 
@@ -44,13 +48,14 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
     List<OrderItem> getOrderItems() {
       return List<OrderItem>.generate(cartItems.length, (index) {
-        CartModel cartModel = cartItems[index];
+        CartItemModel cartModel = cartItems[index];
         return OrderItem(
+          customerId: _accountProvider.user!.uid,
           name: cartModel.name,
           productId: cartModel.productId,
-          price: cartModel.currentPrice,
+          price: cartModel.price,
           image: cartModel.image,
-          noOfItems: cartModel.numOfItems,
+          noOfItems: cartModel.numberOfItems,
         );
       });
     }
@@ -58,23 +63,26 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     orderId =
         "${cartItemStatus.priceInCart}${DateTime.now().millisecondsSinceEpoch}";
     OrderModel orderModel = OrderModel(
-        orderId:
-            orderId,
+        orderId: orderId,
         orderItems: getOrderItems(),
-        userId: await firebaseRep.getUid(),
-        // paymentId: response.paymentId,
-        // signature: response.signature,
+        customerId: _accountProvider.user!.uid,
         total: cartItemStatus.priceInCart,
-        orderAddress: accountProvider.addressSelected);
+        orderAddress: _addressesProvider.selectedAddress!);
     print(orderModel);
     return orderModel;
   }
 
   cancelOrder(String orderId) async {
-    try {
-      await firestoreRepo.cancelOrder(orderId);
-    } catch (e) {
-      print(e);
+    bool hasConnection = await _connectivity.checkInternetConnection();
+    if (hasConnection) {
+      try {
+        await _firestoreRepo.cancelOrder(orderId);
+        emit(PlaceOrderState.orderCanceled());
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      emit(PlaceOrderState.error(StringsConstants.connectionNotAvailable));
     }
   }
 }

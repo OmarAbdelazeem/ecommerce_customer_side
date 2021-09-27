@@ -1,171 +1,144 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:baqal/src/core/navigation.dart';
-import 'package:baqal/src/ui/screens/product_detail_page.dart';
+import 'package:baqal/src/bloc/add_to_cart/add_to_cart_cubit.dart';
+import 'package:baqal/src/bloc/add_to_cart/add_to_cart_state.dart';
+import 'package:baqal/src/di/app_injector.dart';
+import 'package:baqal/src/notifiers/account_provider.dart';
+import 'package:baqal/src/notifiers/cart_status_provider.dart';
+import 'package:baqal/src/notifiers/language_notifier.dart';
+import 'package:baqal/src/res/string_constants.dart';
+import 'package:baqal/src/routes/router_utils.dart';
+import 'package:baqal/src/routes/routes_constants.dart';
+import 'package:baqal/src/ui/common/product_not_available.dart';
+import 'package:baqal/src/ui/common/snack_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:baqal/src/models/product_model.dart';
 import 'package:baqal/src/res/text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'add_to_cart_view.dart';
 
+class ProductCard extends StatefulWidget {
+  final ProductModel product;
 
-class ProductCard extends StatelessWidget {
-  final ProductModel productModel;
-  final fromCategories;
+  ProductCard({required this.product});
 
-  ProductCard({required this.productModel, this.fromCategories = false});
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  var addToCartCubit = getItInstance<AddToCartCubit>();
+  final accountProvider = getItInstance<AccountProvider>();
+  final cartStatusProvider = getItInstance<CartStatusProvider>();
+  final languageProvider = getItInstance<LanguageProvider>();
+  final routerUtils = getItInstance<RouterUtils>();
+  @override
+  void initState() {
+    // if (accountProvider.user != null) {
+    addToCartCubit.listenToCartItem(widget.product.productId);
+    // }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    StackRouter appRouter = AutoRouter.of(context);
     return InkWell(
       borderRadius: BorderRadius.circular(10),
       onTap: () {
-        Navigation.push(context , ProductDetailPage(productModel));
-
+        routerUtils.pushNamedRoot(context, Routes.productDetailsScreen,arguments: widget.product);
+        // Navigator.pushNamed(context, Routes.productDetailsScreen,
+        //     arguments: widget.product);
       },
-      child: fromCategories
-          ? _verticalProductView(context, productModel)
-          : _horizontalProductView(context, productModel),
-    );
-  }
-}
-
-Widget _verticalProductView(BuildContext context, ProductModel productModel) {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 8.0),
-    child: Container(
-      width: MediaQuery.of(context).size.width * 0.98,
-      height: 180,
-      child: Card(
-        // elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: Colors.white,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              child: CachedNetworkImage(
-                height: MediaQuery.of(context).size.height * .4,
-                width: MediaQuery.of(context).size.width * .35,
-                imageUrl: productModel.image,
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.5,
-              margin: EdgeInsets.all(5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: 5,
+      child: Container(
+        width: 180,
+        child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.product.image!,
+                    fit: BoxFit.contain,
+                    height: 100,
                   ),
-                  Text(
-                    productModel.name,
-                    style: AppTextStyles.medium14Black,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Row(
+                ),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        "EGP${productModel.currentPrice}",
-                        style: AppTextStyles.normal12Black,
+                      SizedBox(
+                        height: 5,
                       ),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      // Text(
-                      //   "${productModel.currency}${productModel.actualPrice}",
-                      //   style: AppTextStyles.normal12Color81819AStroke,
-                      // ),
+                      Text(
+                        languageProvider.isEnglish
+                            ? widget.product.name.english
+                            : widget.product.name.arabic,
+                        style: AppTextStyles.normalText,
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "${languageProvider.getTranslated(context, StringsConstants.egyptCurrency)} ${widget.product.discountPrice}",
+                            // style: AppTextStyles.normal12Black,
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          widget.product.discountPrice != widget.product.price
+                              ? Text(
+                                  "${languageProvider.getTranslated(context, StringsConstants.egyptCurrency)} ${widget.product.price}",
+                                  style: TextStyle(
+                                      decoration: TextDecoration.lineThrough),
+                                )
+                              : Container(),
+                        ],
+                      ),
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  // Text(
-                  //   "${productModel.quantityPerUnit}${productModel.unit}",
-                  //   style: AppTextStyles.normal12Color81819A,
-                  // ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
-Widget _horizontalProductView(BuildContext context, ProductModel productModel) {
-  return Container(
-    width: 150,
-    height: 150,
-    child: Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-            child: AspectRatio(
-              aspectRatio: 1.5,
-              child: CachedNetworkImage(
-                imageUrl: productModel.image,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+                ),
+                widget.product.remainQuantity! > 0
+                    ? BlocConsumer<AddToCartCubit, AddToCartState>(
+                        bloc: addToCartCubit,
+                        builder: (BuildContext context, AddToCartState state) {
+                          return AddToCartView(
+                              addToCartCubit: addToCartCubit,
+                              product: widget.product,
+                              isForProductCard: true,
+                              height: 40,
+                              context: context);
+                        },
+                        listener: (BuildContext context, AddToCartState state) {
+                          if (state is UpdateCartError)
+                            showSnackBar(
+                                title: state.errorMessage, context: context);
+                          else if (state is AddToCartError)
+                            showSnackBar(
+                                title: state.errorMessage, context: context);
+                          else if (state is DeleteCartError) {
+                            showSnackBar(
+                                title: state.errorMessage, context: context);
+                          }
+                        },
+                      )
+                    : productNotAvailable(),
                 SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  productModel.name,
-                  style: AppTextStyles.medium14Black,
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      "Egp ${productModel.currentPrice}",
-                      style: AppTextStyles.normal12Black,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    // Text(
-                    //   "${productModel.currency}${productModel.actualPrice}",
-                    //   style: AppTextStyles.normal12Color81819AStroke,
-                    // ),
-                  ],
-                ),
-                // SizedBox(
-                //   height: 10,
-                // ),
-                // Text(
-                //   "${productModel.quantityPerUnit}${productModel.unit}",
-                //   style: AppTextStyles.normal12Color81819A,
-                // ),
+                  height: 10,
+                )
               ],
             ),
-          )
-        ],
+          ),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

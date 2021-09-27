@@ -1,3 +1,5 @@
+import 'package:baqal/src/di/app_injector.dart';
+import 'package:baqal/src/routes/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:baqal/src/res/app_colors.dart';
 import 'package:baqal/src/res/text_styles.dart';
@@ -31,7 +33,7 @@ class _CommonSearchTextFieldState extends State<CommonSearchTextField> {
           textInputAction: TextInputAction.search,
           onSubmitted: widget.onSubmitted,
           onChanged: widget.onChanged,
-          style: AppTextStyles.normal16Black,
+          style: AppTextStyles.normalText,
           decoration: InputDecoration(
               hintText: widget.hint,
               contentPadding: EdgeInsets.only(top: 25),
@@ -44,7 +46,7 @@ class _CommonSearchTextFieldState extends State<CommonSearchTextField> {
               ),
               fillColor: AppColors.colorF6F5F8,
               filled: true,
-              hintStyle: AppTextStyles.normal16Color8E8E92,
+              hintStyle: AppTextStyles.normalText,
               focusColor: AppColors.white,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -85,7 +87,7 @@ class _CommonSearchBarState extends State<CommonSearchBar> {
   FocusNode focusNode = FocusNode();
   TextEditingController textEditingController = TextEditingController();
   bool showCross = false;
-
+  final routerUtils = getItInstance<RouterUtils>();
   @override
   void initState() {
     super.initState();
@@ -105,7 +107,6 @@ class _CommonSearchBarState extends State<CommonSearchBar> {
     return AppBar(
       title: TextField(
         controller: textEditingController,
-        autofocus: true,
         focusNode: focusNode,
         onChanged: (value) {
           widget.onTextChanged!(value.trim());
@@ -129,7 +130,7 @@ class _CommonSearchBarState extends State<CommonSearchBar> {
                         if (widget.onClosePressed != null) {
                           widget.onClosePressed!();
                         }
-                        Navigator.of(context).pop();
+                        routerUtils.pop(context);
                       } else {
                         textEditingController.clear();
                         widget.onTextChanged!("");
@@ -137,7 +138,7 @@ class _CommonSearchBarState extends State<CommonSearchBar> {
                     })),
             fillColor: AppColors.colorF6F5F8,
             filled: true,
-            hintStyle: AppTextStyles.normal16Color8E8E92,
+            hintStyle: AppTextStyles.normalText,
             focusColor: AppColors.white,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),

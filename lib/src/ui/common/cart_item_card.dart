@@ -1,41 +1,70 @@
+import 'package:baqal/src/notifiers/account_provider.dart';
+import 'package:baqal/src/notifiers/language_notifier.dart';
+import 'package:baqal/src/res/string_constants.dart';
+import 'package:baqal/src/routes/router_utils.dart';
+import 'package:baqal/src/ui/common/snack_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:baqal/src/bloc/cart_item/cart_item.dart';
 import 'package:baqal/src/di/app_injector.dart';
-import 'package:baqal/src/models/cartModel_model.dart';
+import 'package:baqal/src/models/cart_model.dart';
 import 'package:baqal/src/res/app_colors.dart';
-import 'package:baqal/src/res/string_constants.dart';
-import 'package:baqal/src/ui/common/action_text.dart';
 import 'package:baqal/src/ui/common/common_app_loader.dart';
 
-enum AddButton { Add, Minus }
+import 'add_or_minus_button.dart';
 
 class CartItemCard extends StatefulWidget {
-  final CartModel cartModel;
-  final EdgeInsets margin;
+  final CartItemModel cartModel;
 
-  CartItemCard({required this.margin,required this.cartModel});
+  CartItemCard({required this.cartModel});
 
   @override
-  _CartItemCardState createState() => _CartItemCardState();
+  State<CartItemCard> createState() => _CartItemCardState();
 }
 
 class _CartItemCardState extends State<CartItemCard> {
   var cartItemCubit = getItInstance<CartItemCubit>();
+  final accountProvider = getItInstance<AccountProvider>();
+  final languageProvider = getItInstance<LanguageProvider>();
+  final routerUtils = getItInstance<RouterUtils>();
 
   @override
   void initState() {
-    cartItemCubit.initCartValues(widget.cartModel.numOfItems);
+    if(accountProvider.user !=null)cartItemCubit.listenToCartItemUpdates(widget.cartModel.productId);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: widget.margin,
 
+    void showConfirmationDialogue() async {
+      await showDialog(
+          context: context,
+          builder: (dialogueContext) {
+            return AlertDialog(
+              title: Text(languageProvider.getTranslated(context, StringsConstants.removeItem)!),
+              content: Text(languageProvider.getTranslated(context, StringsConstants.removeItemConfigurationText)!),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      cartItemCubit.deleteCartItem(widget.cartModel.productId);
+                      routerUtils.pop(context);
+                    },
+                    child: Text(languageProvider.getTranslated(context, StringsConstants.yes)!)),
+                TextButton(
+                    onPressed: () {
+                      routerUtils.pop(context);
+                    },
+                    child: Text(languageProvider.getTranslated(context, StringsConstants.no)!))
+              ],
+            );
+          });
+    }
+
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
       child: Card(
         child: Container(
           padding: EdgeInsets.all(10),
@@ -43,7 +72,6 @@ class _CartItemCardState extends State<CartItemCard> {
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,9 +89,9 @@ class _CartItemCardState extends State<CartItemCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width *0.6,
+                            width: MediaQuery.of(context).size.width * 0.6,
                             child: Text(
-                              widget.cartModel.name,
+                              languageProvider.isEnglish ? widget.cartModel.name.english : widget.cartModel.name.arabic,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 15,
@@ -74,7 +102,7 @@ class _CartItemCardState extends State<CartItemCard> {
                             height: 10,
                           ),
                           Text(
-                            "EGP ${widget.cartModel.currentPrice} ",
+                            "${languageProvider.getTranslated(context, StringsConstants.egyptCurrency)} ${widget.cartModel.price} ",
                             style: TextStyle(
                                 fontSize: 14, color: AppColors.color81819A),
                           ),
@@ -82,32 +110,19 @@ class _CartItemCardState extends State<CartItemCard> {
                       )
                     ],
                   ),
-                  // BlocBuilder<CartItemCubit, CartItemState>(
-                  //   cubit: cartItemCubit,
-                  //   builder: (BuildContext context, CartItemState state) {
-                  //     if (state is CartDeleteLoading) {
-                  //       return CommonAppLoader(
-                  //         size: 20,
-                  //       );
-                  //     }
-                  //     return Padding(
-                  //       padding: const EdgeInsets.all(8.0),
-                  //       child: ActionText(
-                  //         StringsConstants.deleteCaps,
-                  //         onTap: () {
-                  //           cartItemCubit.deleteItem(widget.cartModel);
-                  //         },
-                  //       ),
-                  //     );
-                  //   },
-                  // )
                 ],
               ),
               SizedBox(
                 height: 26,
               ),
-              BlocBuilder<CartItemCubit, CartItemState>(
-                bloc:  cartItemCubit,
+              BlocConsumer<CartItemCubit, CartItemState>(
+                listener: (BuildContext context, CartItemState state) {
+                  if (state is UpdateCartError)
+                    showSnackBar(title: state.errorMessage, context: context);
+                  else if (state is DeleteCartError)
+                    showSnackBar(title: state.errorMessage, context: context);
+                },
+                bloc: cartItemCubit,
                 builder: (BuildContext context, CartItemState state) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,14 +131,14 @@ class _CartItemCardState extends State<CartItemCard> {
                         width: 110,
                         child: Row(
                           children: [
-                            addButton(
+                            addOrMinusButton(
                                 false,
                                 state is CartDataLoading
                                     ? null
                                     : () {
-                                        cartItemCubit.updateCartValues(
+                                        cartItemCubit.updateCartItem(
                                             widget.cartModel,
-                                            widget.cartModel.numOfItems,
+                                            widget.cartModel.numberOfItems,
                                             false);
                                       }),
                             Expanded(
@@ -134,31 +149,45 @@ class _CartItemCardState extends State<CartItemCard> {
                                             strokeWidth: 3,
                                           )
                                         : Text(
-                                            "${widget.cartModel.numOfItems}",
+                                            "${widget.cartModel.numberOfItems}",
                                             style: TextStyle(
                                               color: AppColors.black,
                                               fontSize: 14,
                                             ),
                                           ))),
-                            addButton(
+                            addOrMinusButton(
                                 true,
                                 state is CartDataLoading
                                     ? null
                                     : () {
-                                        cartItemCubit.updateCartValues(
+                                        cartItemCubit.updateCartItem(
                                             widget.cartModel,
-                                            widget.cartModel.numOfItems,
+                                            widget.cartModel.numberOfItems,
                                             true);
                                       })
                           ],
                         ),
                       ),
-                      Text(
-                        "EGP ${widget.cartModel.currentPrice * widget.cartModel.numOfItems}",
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: 14,
-                        ),
+                      BlocBuilder<CartItemCubit, CartItemState>(
+                        bloc: cartItemCubit,
+                        builder: (BuildContext context, CartItemState state) {
+                          if (state is CartDeleteLoading) {
+                            return CommonAppLoader(
+                              size: 20,
+                            );
+                          }
+                          return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  showConfirmationDialogue();
+                                },
+                              ));
+                        },
                       )
                     ],
                   );
@@ -170,23 +199,4 @@ class _CartItemCardState extends State<CartItemCard> {
       ),
     );
   }
-
-  Widget addButton(bool isAdd, VoidCallback ? onTap) => GestureDetector(
-        onTap: onTap,
-        behavior: HitTestBehavior.opaque,
-        child: Container(
-          height: 32,
-          width: 32,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: isAdd ? AppColors.primaryColor : AppColors.colorE2E6EC),
-          child: Center(
-            child: Icon(
-              isAdd ? Icons.add : Icons.remove,
-              color: isAdd ? AppColors.white : AppColors.color81819A,
-            ),
-          ),
-        ),
-      );
 }

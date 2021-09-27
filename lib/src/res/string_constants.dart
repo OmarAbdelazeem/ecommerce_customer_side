@@ -1,83 +1,94 @@
 class StringsConstants {
-  static const login = "Login";
+  static const login = "login";
 
   static const phoneLoginText =
-      "Enter your number to log in or create an account";
-  static const registerText =
-      "Enter your number or email to create an account";
-  static const continueText = "Continue";
-  static const mobileNumber = "Mobile Number";
-  static const skip = "Skip";
-  static const goBack = "< Go Back";
-  static const changeNumber = "Change Number?";
-  static const mobileVerification = "Mobile Verification";
+      "phone_login_text";
+
+  static const changeNumber = "change_number";
+
   static const mobileVerificationDesc =
-      "SMS with a 6 digit code has been sent on your mobile number";
-  static const enterOtp = "Enter OTP";
-  static const confirmOtp = "Confirm OTP";
-  static const resendOtp = "Didn’t get OTP? Send again";
+      "mobile_verification_desc";
+  static const enterVerificationCode = "enter_verification_code";
+  static const confirmVerificationCode = "confirm_verification_code";
+  static const resendVerificationCodeText = "resend_verification_code_text";
 
-  static const onSale = "On Sale";
-  static const topProducts = "Top Products";
-  static const dealOfTheDay = "Deal of the day";
+  static const add = "add";
+  static const home = "home";
+  static const search = "search";
+  static const cart = "cart";
+  static const account = "account";
+  static const viewCart = "view_cart";
+  static const edit = "edit";
+  static const products = "products";
+  static const details = "details";
+  static const name = "name";
 
-  static const add = "Add";
-  static const home = "Home";
-  static const search = "Search";
-  static const cart = "Cart";
-  static const account = "Account";
-  static const viewCart = "View Cart";
-  static const edit = "Edit";
-  static const products = "Products";
-  static const details = "Details";
-  static const editCaps = "EDIT";
-  static const defaultCaps = "DEFAULT";
+  static const deliverTo = "deliver_to";
+  static const changeTextCapital = "change_text_capital";
 
-  static const billDetails = "Bill Details";
-  static const basketTotal = "Cart Total";
-  static const taxAndCharges = "Tax and Charges";
-  static const toPay = "To Pay";
-  static const deliverTo = "Deliver to";
-  static const changeTextCapital = "CHANGE";
-  static const viewDetailedBillCaps = "VIEW DETAILED BILL";
-  static const makePayment = "Make Payment";
-  static const applyCoupon = "Apply Coupon";
-  static const searchItems = "Search Items...";
+  static const searchForProduct = "search_for_product";
 
-  static const deleteCaps = "DELETE";
-  static const viewAllProducts = "View All Products";
-  static const viewAllCaps = "VIEW ALL";
-  static const myAccount = "My Account";
-  static const allProducts = "All Products";
-  static const setAsDefaultCaps = "SET AS DEFAULT";
-  static const manageAddress = "Manage Address";
 
-  static const myAddress = "My Address";
-  static const selectAddress = "Select Address";
-  static const addNewAddress = "Add New Address";
-  static const savedAddresses = "Saved Address";
-  static const addNewCaps = "ADD NEW";
-  static const name = "Name";
-  static const pincode = "Pincode";
-  static const address = "Address";
-  static const city = "City";
-  static const state = "State";
-  static const phoneNumber = "Phone Number";
-  static const save = "Save";
-  static const myOrders = "My Orders";
+  static const myAddress = "my_address";
+  static const selectAddress = "select_address";
 
-  static const appSettings = "App Settings";
+  static const savedAddresses = "saved_address";
+  static const addNewTextCapital = "add_new_text_capital";
+  static const address = "address";
+  static const streetName = "street_name";
+  static const buildingNumber = "building_number";
+  static const floorNumber = "floor_number";
+  static const landMarkOrSpecialSign = "land_mark_or_special_sign";
+  static const addressDescription = "address_description";
+  static const phoneNumber = "phone_number";
+  static const save = "save";
+  static const myOrders = "my_orders";
+  static const chooseLanguage = "choose_language";
+  static const changeLanguage = "change_language";
+  static const changePhoneNumber = "change_phone_number";
+  static const profile = 'profile';
+  static const egyptCurrency = 'egypt_currency';
+  static const topProducts = 'top_products';
+  static const orderNumber = 'order_number';
+  static const total = 'total';
+  static const viewOrderDetails = 'view_order_details';
 
-  static const help = "Help";
-  static const faqs = "FAQs";
-  static const logout = "Logout";
-  static const totalCaps = "TOTAL";
+  static const canceled = 'Canceled';
+  static const processing = 'Processing';
+  static const Delivered = 'Delivered';
+  static const Delivering = 'Delivering';
+  static const orderDetails = 'order_details';
+  static const cancelOrder = 'cancel_order';
+  static const deliveryAddress = 'delivery_address';
+  static const paymentSummary = 'payment_summary';
+  static const subtotal = 'subtotal';
+  static const deliveryFee = 'delivery_fee';
+  static const totalAmount = 'total_amount';
+  static const cancelOrderStatementText = 'cancel_order_statement_text';
+  static const yes = 'yes';
+  static const no = 'no';
+  static const proceedToCheckout = 'proceed_to_checkout';
+  static const removeItem = 'remove_item';
+  static const removeItemConfigurationText = 'remove_item_configuration_text';
+  static const continueText = 'continue_text';
+  static const enterName = 'enter_name';
+  static const english = 'english';
+  static const arabic = 'arabic';
+  static const emptyCartStatementText = 'empty_cart_statement_text';
+  static const checkout = 'checkout';
+  static const payWith = 'pay_with';
+  static const cashOnDelivery = 'cash_on_delivery';
+  static const placeOrder = 'place_order';
+  static const orderNotesStatement = 'order_notes_statement';
+  static const notes = 'notes';
 
-  static const orderedOnCaps = "ORDERED ON";
+  static const logout = "logout";
+
+  static const addToCart = "add_to_cart";
 
   //error messages
 
-  static const noAddressFound = "No Address Found";
+  static const noAddressFound = "no_address_found";
   static const noAddressSelected = "No Address Selected";
-  static const connectionNotAvailable = "Network Connection not available";
+  static const connectionNotAvailable = "connection_not_available";
 }

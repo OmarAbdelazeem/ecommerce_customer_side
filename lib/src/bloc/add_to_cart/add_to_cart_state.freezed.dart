@@ -29,9 +29,9 @@ class _$AddToCartStateTearOff {
     return const CartDataLoading();
   }
 
-  ShowCartValue showCartValue(num noOfItems) {
+  ShowCartValue showCartValue(int cartItemNumber) {
     return ShowCartValue(
-      noOfItems,
+      cartItemNumber,
     );
   }
 
@@ -65,7 +65,7 @@ mixin _$AddToCartState {
     required TResult Function() addToCardLoading,
     required TResult Function() showAddButton,
     required TResult Function() cartDataLoading,
-    required TResult Function(num noOfItems) showCartValue,
+    required TResult Function(int cartItemNumber) showCartValue,
     required TResult Function(String errorMessage) addToCartError,
     required TResult Function(String errorMessage, int cartValue)
         updateCartError,
@@ -77,7 +77,7 @@ mixin _$AddToCartState {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -88,7 +88,7 @@ mixin _$AddToCartState {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -191,7 +191,7 @@ class _$AddToCardLoading implements AddToCardLoading {
     required TResult Function() addToCardLoading,
     required TResult Function() showAddButton,
     required TResult Function() cartDataLoading,
-    required TResult Function(num noOfItems) showCartValue,
+    required TResult Function(int cartItemNumber) showCartValue,
     required TResult Function(String errorMessage) addToCartError,
     required TResult Function(String errorMessage, int cartValue)
         updateCartError,
@@ -206,7 +206,7 @@ class _$AddToCardLoading implements AddToCardLoading {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -220,7 +220,7 @@ class _$AddToCardLoading implements AddToCardLoading {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -326,7 +326,7 @@ class _$ShowAddButton implements ShowAddButton {
     required TResult Function() addToCardLoading,
     required TResult Function() showAddButton,
     required TResult Function() cartDataLoading,
-    required TResult Function(num noOfItems) showCartValue,
+    required TResult Function(int cartItemNumber) showCartValue,
     required TResult Function(String errorMessage) addToCartError,
     required TResult Function(String errorMessage, int cartValue)
         updateCartError,
@@ -341,7 +341,7 @@ class _$ShowAddButton implements ShowAddButton {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -355,7 +355,7 @@ class _$ShowAddButton implements ShowAddButton {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -461,7 +461,7 @@ class _$CartDataLoading implements CartDataLoading {
     required TResult Function() addToCardLoading,
     required TResult Function() showAddButton,
     required TResult Function() cartDataLoading,
-    required TResult Function(num noOfItems) showCartValue,
+    required TResult Function(int cartItemNumber) showCartValue,
     required TResult Function(String errorMessage) addToCartError,
     required TResult Function(String errorMessage, int cartValue)
         updateCartError,
@@ -476,7 +476,7 @@ class _$CartDataLoading implements CartDataLoading {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -490,7 +490,7 @@ class _$CartDataLoading implements CartDataLoading {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -558,7 +558,7 @@ abstract class $ShowCartValueCopyWith<$Res> {
   factory $ShowCartValueCopyWith(
           ShowCartValue value, $Res Function(ShowCartValue) then) =
       _$ShowCartValueCopyWithImpl<$Res>;
-  $Res call({num noOfItems});
+  $Res call({int cartItemNumber});
 }
 
 /// @nodoc
@@ -574,13 +574,13 @@ class _$ShowCartValueCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? noOfItems = freezed,
+    Object? cartItemNumber = freezed,
   }) {
     return _then(ShowCartValue(
-      noOfItems == freezed
-          ? _value.noOfItems
-          : noOfItems // ignore: cast_nullable_to_non_nullable
-              as num,
+      cartItemNumber == freezed
+          ? _value.cartItemNumber
+          : cartItemNumber // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -588,28 +588,29 @@ class _$ShowCartValueCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ShowCartValue implements ShowCartValue {
-  const _$ShowCartValue(this.noOfItems);
+  const _$ShowCartValue(this.cartItemNumber);
 
   @override
-  final num noOfItems;
+  final int cartItemNumber;
 
   @override
   String toString() {
-    return 'AddToCartState.showCartValue(noOfItems: $noOfItems)';
+    return 'AddToCartState.showCartValue(cartItemNumber: $cartItemNumber)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ShowCartValue &&
-            (identical(other.noOfItems, noOfItems) ||
+            (identical(other.cartItemNumber, cartItemNumber) ||
                 const DeepCollectionEquality()
-                    .equals(other.noOfItems, noOfItems)));
+                    .equals(other.cartItemNumber, cartItemNumber)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(noOfItems);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(cartItemNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -622,13 +623,13 @@ class _$ShowCartValue implements ShowCartValue {
     required TResult Function() addToCardLoading,
     required TResult Function() showAddButton,
     required TResult Function() cartDataLoading,
-    required TResult Function(num noOfItems) showCartValue,
+    required TResult Function(int cartItemNumber) showCartValue,
     required TResult Function(String errorMessage) addToCartError,
     required TResult Function(String errorMessage, int cartValue)
         updateCartError,
     required TResult Function(String errorMessage) deleteCartError,
   }) {
-    return showCartValue(noOfItems);
+    return showCartValue(cartItemNumber);
   }
 
   @override
@@ -637,12 +638,12 @@ class _$ShowCartValue implements ShowCartValue {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
   }) {
-    return showCartValue?.call(noOfItems);
+    return showCartValue?.call(cartItemNumber);
   }
 
   @override
@@ -651,14 +652,14 @@ class _$ShowCartValue implements ShowCartValue {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
     required TResult orElse(),
   }) {
     if (showCartValue != null) {
-      return showCartValue(noOfItems);
+      return showCartValue(cartItemNumber);
     }
     return orElse();
   }
@@ -711,9 +712,9 @@ class _$ShowCartValue implements ShowCartValue {
 }
 
 abstract class ShowCartValue implements AddToCartState {
-  const factory ShowCartValue(num noOfItems) = _$ShowCartValue;
+  const factory ShowCartValue(int cartItemNumber) = _$ShowCartValue;
 
-  num get noOfItems => throw _privateConstructorUsedError;
+  int get cartItemNumber => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ShowCartValueCopyWith<ShowCartValue> get copyWith =>
       throw _privateConstructorUsedError;
@@ -788,7 +789,7 @@ class _$AddToCartError implements AddToCartError {
     required TResult Function() addToCardLoading,
     required TResult Function() showAddButton,
     required TResult Function() cartDataLoading,
-    required TResult Function(num noOfItems) showCartValue,
+    required TResult Function(int cartItemNumber) showCartValue,
     required TResult Function(String errorMessage) addToCartError,
     required TResult Function(String errorMessage, int cartValue)
         updateCartError,
@@ -803,7 +804,7 @@ class _$AddToCartError implements AddToCartError {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -817,7 +818,7 @@ class _$AddToCartError implements AddToCartError {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -966,7 +967,7 @@ class _$UpdateCartError implements UpdateCartError {
     required TResult Function() addToCardLoading,
     required TResult Function() showAddButton,
     required TResult Function() cartDataLoading,
-    required TResult Function(num noOfItems) showCartValue,
+    required TResult Function(int cartItemNumber) showCartValue,
     required TResult Function(String errorMessage) addToCartError,
     required TResult Function(String errorMessage, int cartValue)
         updateCartError,
@@ -981,7 +982,7 @@ class _$UpdateCartError implements UpdateCartError {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -995,7 +996,7 @@ class _$UpdateCartError implements UpdateCartError {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -1134,7 +1135,7 @@ class _$DeleteCartError implements DeleteCartError {
     required TResult Function() addToCardLoading,
     required TResult Function() showAddButton,
     required TResult Function() cartDataLoading,
-    required TResult Function(num noOfItems) showCartValue,
+    required TResult Function(int cartItemNumber) showCartValue,
     required TResult Function(String errorMessage) addToCartError,
     required TResult Function(String errorMessage, int cartValue)
         updateCartError,
@@ -1149,7 +1150,7 @@ class _$DeleteCartError implements DeleteCartError {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,
@@ -1163,7 +1164,7 @@ class _$DeleteCartError implements DeleteCartError {
     TResult Function()? addToCardLoading,
     TResult Function()? showAddButton,
     TResult Function()? cartDataLoading,
-    TResult Function(num noOfItems)? showCartValue,
+    TResult Function(int cartItemNumber)? showCartValue,
     TResult Function(String errorMessage)? addToCartError,
     TResult Function(String errorMessage, int cartValue)? updateCartError,
     TResult Function(String errorMessage)? deleteCartError,

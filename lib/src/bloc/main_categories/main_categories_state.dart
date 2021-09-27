@@ -9,9 +9,9 @@ part 'main_categories_state.freezed.dart';
 abstract class MainCategoriesState with _$MainCategoriesState {
   const factory MainCategoriesState.idle() = Idle;
   //
-  const factory MainCategoriesState.categoriesLoading() = CategoriesLoading;
+  const factory MainCategoriesState.loading() = Loading;
 
-  const factory MainCategoriesState.categoriesLoaded(List<MainCategoryModel> mainCategories) = CategoriesLoaded;
+  const factory MainCategoriesState.loaded(List<MainCategoryModel> mainCategories) = Loaded;
 
   const factory MainCategoriesState.mainCategorySelected(
       MainCategoryModel mainCategoryModel) = MainCategorySelected;

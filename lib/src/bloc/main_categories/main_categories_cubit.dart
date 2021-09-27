@@ -1,6 +1,7 @@
-import 'package:baqal/src/bloc/base_states/result_state/result_state.dart';
+import 'package:baqal/src/core/utils/connectivity.dart';
 import 'package:baqal/src/di/app_injector.dart';
 import 'package:baqal/src/models/main_category_model.dart';
+import 'package:baqal/src/notifiers/categories_provider.dart';
 import 'package:baqal/src/repository/firestore_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,26 +13,41 @@ class MainCategoriesCubit extends Cubit<MainCategoriesState> {
   var _firestoreRepo = getItInstance<FirestoreRepository>();
   late List<DocumentSnapshot> _documents;
   List<MainCategoryModel> _mainCategoriesList = [];
-  late MainCategoryModel selectedMainCategory;
-  late MainCategoryModel selectedSubCategory;
+  final categoriesProvider = getItInstance<CategoriesProvider>();
+  MyConnectivity _connectivity = MyConnectivity.instance;
 
   fetchMainCategories() async {
-    emit(MainCategoriesState.categoriesLoading());
-    try {
-      _documents = await _firestoreRepo.fetchMainCategories();
-      _mainCategoriesList = List<MainCategoryModel>.generate(_documents.length,
-          (index) => MainCategoryModel.fromJson(_documents[index]));
-      List.generate(_mainCategoriesList.length, (index) {
-        print(_mainCategoriesList[index].name);
-      });
-      print(_mainCategoriesList.length);
-      emit(MainCategoriesState.categoriesLoaded(_mainCategoriesList.toSet().toList()));
+    bool hasConnection = await _connectivity.checkInternetConnection();
+    if(hasConnection){
+      emit(MainCategoriesState.loading());
+      try {
+        // 1 - fetch main categories docs
+        _documents = await _firestoreRepo.fetchMainCategories();
 
-      // emit(ResultState.data(data: _mainCategoriesList.toSet().toList()));
-    } catch (e) {
-      emit(MainCategoriesState.error(e.toString()));
+        // 2 - convert docs to main categories models
+
+        var temp = List<MainCategoryModel>.generate(_documents.length,
+                (index) => MainCategoryModel.fromJson(_documents[index]));
+
+        // 3 - remove empty main categories
+        temp.removeWhere((element) => element.subCategoriesIds.isEmpty);
+
+
+        _mainCategoriesList = temp;
+
+        categoriesProvider.setMainCategories = _mainCategoriesList;
+
+        emit(MainCategoriesState.loaded(_mainCategoriesList));
+
+      } catch (e) {
+        print('categories cubit error is $e');
+        emit(MainCategoriesState.error(e.toString()));
+      }
     }
+
+
   }
+
 
   get mainCategories => _mainCategoriesList;
 }

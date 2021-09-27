@@ -1,32 +1,33 @@
-
 import 'package:baqal/src/bloc/place_order/place_order.dart';
-import 'package:baqal/src/core/navigation.dart';
 import 'package:baqal/src/di/app_injector.dart';
-import 'package:baqal/src/notifiers/account_provider.dart';
+import 'package:baqal/src/notifiers/addresses_provider.dart';
+import 'package:baqal/src/notifiers/delivery_areas_provider.dart';
+import 'package:baqal/src/notifiers/language_notifier.dart';
 import 'package:baqal/src/notifiers/provider_notifier.dart';
 import 'package:baqal/src/res/string_constants.dart';
 import 'package:baqal/src/res/text_styles.dart';
+import 'package:baqal/src/routes/router_utils.dart';
+import 'package:baqal/src/routes/routes_constants.dart';
 import 'package:baqal/src/ui/common/action_text.dart';
+import 'package:baqal/src/ui/common/commom_text_field.dart';
 import 'package:baqal/src/ui/common/common_button.dart';
 import 'package:baqal/src/ui/common/common_card.dart';
-import 'package:baqal/src/ui/screens/add_address_screen.dart';
-import 'package:baqal/src/ui/screens/select_adress_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../di/app_injector.dart';
 import '../../notifiers/cart_status_provider.dart';
-import 'order_confirmation.dart';
 
 class CheckOutScreen extends StatefulWidget {
-
   @override
   _CheckOutScreenState createState() => _CheckOutScreenState();
 }
 
 class _CheckOutScreenState extends State<CheckOutScreen> {
   var placeOrderCubit = getItInstance<PlaceOrderCubit>();
-
+  CartStatusProvider cartItemStatus = getItInstance<CartStatusProvider>();
+  final deliveryAreasProvider = getItInstance<DeliveryAreasProvider>();
+  final languageProvider = getItInstance<LanguageProvider>();
+  final routerUtils = getItInstance<RouterUtils>();
   @override
   void initState() {
     // TODO: implement initState
@@ -37,7 +38,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Checkout'),
+        title: Text(languageProvider.getTranslated(
+            context, StringsConstants.checkout)!),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +57,24 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     width: 15,
                   ),
                   Text(
-                    'Pay with',
+                    languageProvider.getTranslated(
+                        context, StringsConstants.notes)!,
+                    style: TextStyle(fontSize: 22),
+                  ),
+                ],
+              ),
+              notesView(),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    languageProvider.getTranslated(
+                        context, StringsConstants.payWith)!,
                     style: TextStyle(fontSize: 22),
                   ),
                 ],
@@ -76,7 +95,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         SizedBox(
                           width: 10,
                         ),
-                        const Text('Cash'),
+                        Text(languageProvider.getTranslated(
+                            context, StringsConstants.cashOnDelivery)!),
                       ],
                     ),
                     leading: Radio<bool>(
@@ -92,7 +112,17 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: paymentSummary(),
+                child: ProviderNotifier(
+                  child: (AddressesProvider addressesProvider) {
+                    double? deliveryFee = deliveryAreasProvider.getDeliveryFee(
+                        addressesProvider.selectedAddress!.area);
+
+                    return paymentSummary(
+                      deliveryFee: deliveryFee,
+                      priceInCart: cartItemStatus.priceInCart,
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -102,36 +132,31 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               bloc: placeOrderCubit,
               listener: (BuildContext context, PlaceOrderState state) {
                 state.when(
-                    orderPlacedInProgress: () {},
+                    loading: () {},
                     idle: () {},
-                    orderNotPlaced: (String message) {},
+                    orderCanceled: () {},
+                    error: (String message) {},
                     orderSuccessfullyPlaced: () {
-                      // if (Navigator.canPop(context)) {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
-                          return OrderConfirmationScreen(placeOrderCubit.orderId);
-                        }));
-                      // }
+                      routerUtils.popAndPushNamed(context, Routes.orderConfirmationScreen,
+                          arguments: placeOrderCubit.orderId);
+                      // Navigator.popAndPushNamed(
+                      //     context, Routes.orderConfirmationScreen,
+                      //     arguments: placeOrderCubit.orderId);
                     });
               },
               builder: (BuildContext context, PlaceOrderState placeOrderState) {
                 return CommonButton(
-                  title: 'Place order',
+                  title: languageProvider.getTranslated(
+                      context, StringsConstants.placeOrder),
                   width: MediaQuery.of(context).size.width * 0.92,
                   height: 50,
                   replaceWithIndicator:
-                      (placeOrderState is OrderPlacedInProgress) ? true : false,
+                      (placeOrderState is Loading) ? true : false,
                   margin: EdgeInsets.only(bottom: 20),
                   onTap: () {
-                    //Todo fix this as before
-                    var addressProvider = getItInstance<AccountProvider>();
-                    if (addressProvider.addressSelected != null) {
-                      CartStatusProvider cartItemStatus = getItInstance<CartStatusProvider>();
-                        placeOrderCubit.placeOrder(cartItemStatus,);
-
-                    } else {
-                      // showSnackBar(title: StringsConstants.noAddressSelected);
-                    }
-
+                    placeOrderCubit.placeOrder(
+                      cartItemStatus,
+                    );
                   },
                 );
               },
@@ -143,62 +168,80 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   }
 
   Widget deliverTo() {
-    return ProviderNotifier<AccountProvider>(
-      child: (AccountProvider accountProvider) {
-        return CommonCard(
-            child: Container(
-          margin: EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    StringsConstants.deliverTo,
-                    style: AppTextStyles.medium14Black,
-                  ),
-                  ActionText(
-                   title:  accountProvider.addressSelected == null
-                        ? StringsConstants.addNewCaps
-                        : StringsConstants.changeTextCapital,
-                    onTap: () {
-                      if (accountProvider.addressSelected == null) {
-                        Navigation.push(context, AddAddressScreen(true));
-
-                      } 
-                      else {
-                        Navigation.push(context, SelectAddressScreen());
-                      }
-                    },
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-               '${accountProvider.addressSelected.city} , ${accountProvider.addressSelected.state}',
-                style: AppTextStyles.medium12Color81819A,
-              ),
-              SizedBox(height: 15,),
-              Text(
-                accountProvider.addressSelected.address,
-                style: AppTextStyles.medium12Color81819A,
-              ),
-            ],
-          ),
-        ));
+    return ProviderNotifier(
+      child: (AddressesProvider addressesProvider) {
+        return GestureDetector(
+          onTap: () {
+            routerUtils.pushNamedRoot(context, Routes.addOrEditAddressScreen,
+                arguments: addressesProvider.selectedAddress);
+            // Navigator.pushNamed(context, Routes.addOrEditAddressScreen,
+            //     arguments: addressesProvider.selectedAddress);
+          },
+          child: CommonCard(
+              child: Container(
+            margin: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      languageProvider.getTranslated(
+                          context, StringsConstants.deliverTo)!,
+                      style: AppTextStyles.normalText,
+                    ),
+                    ActionText(
+                      title: addressesProvider.selectedAddress == null
+                          ? languageProvider.getTranslated(
+                              context, StringsConstants.addNewTextCapital)!
+                          : languageProvider.getTranslated(
+                              context, StringsConstants.changeTextCapital)!,
+                      onTap: () {
+                        routerUtils.pushNamedRoot(context, Routes.myAddressScreen,
+                            arguments: true);
+                        // Navigator.pushNamed(context, Routes.myAddressScreen,
+                        //     arguments: true);
+                      },
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  '${addressesProvider.selectedAddress!.area} , ${addressesProvider.selectedAddress!.streetName}',
+                  style: AppTextStyles.normalText,
+                ),
+                addressesProvider.selectedAddress!.landmarkSign != null
+                    ? Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            addressesProvider.selectedAddress!.landmarkSign!,
+                            style: AppTextStyles.normalText,
+                          ),
+                        ],
+                      )
+                    : Container(),
+              ],
+            ),
+          )),
+        );
       },
     );
   }
 
-  Widget paymentSummary() {
+  Widget paymentSummary(
+      {required num priceInCart, required double deliveryFee}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Payment Summary',
+          languageProvider.getTranslated(
+              context, StringsConstants.paymentSummary)!,
           style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
         ),
         SizedBox(
@@ -207,31 +250,53 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Subtotal'),
-            Text('EGP 50'),
+            Text(languageProvider.getTranslated(
+                context, StringsConstants.subtotal)!),
+            Text(
+                '${languageProvider.getTranslated(context, StringsConstants.egyptCurrency)} $priceInCart'),
           ],
         ),
         SizedBox(
-          height: 5,
+          height: 10,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Service charge'),
-            Text('EGP 10'),
+            Text(languageProvider.getTranslated(
+                context, StringsConstants.deliveryFee)!),
+            Text(
+                '${languageProvider.getTranslated(context, StringsConstants.egyptCurrency)!} $deliveryFee'),
           ],
         ),
         SizedBox(
-          height: 5,
+          height: 10,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Total amount'),
-            Text('EGP 60'),
+            Text(
+              languageProvider.getTranslated(
+                  context, StringsConstants.totalAmount)!,
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
+            ),
+            Text(
+              '${languageProvider.getTranslated(context, StringsConstants.egyptCurrency)!} ${deliveryFee + priceInCart}',
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
+            ),
           ],
         ),
       ],
+    );
+  }
+
+  Widget notesView() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CustomTextField(
+        maxLines: 3,
+        hint: languageProvider.getTranslated(
+            context, StringsConstants.orderNotesStatement),
+      ),
     );
   }
 }

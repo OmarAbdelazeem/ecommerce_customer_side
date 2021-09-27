@@ -3,30 +3,33 @@ import 'package:flutter/foundation.dart';
 import 'package:baqal/src/models/account_details_model.dart';
 
 class AccountProvider with ChangeNotifier {
-  User ? _user;
+  User? _user;
 
-  User ?  get user => _user;
+  User? get user => _user;
+  bool ? _lastConnectionStatus = false;
 
-  set user(User ? value) {
+  set setLastConnectionStatus(bool val){
+    _lastConnectionStatus = val;
+  }
+  get lastConnectionStatus => _lastConnectionStatus;
+
+  set user(User? value) {
     _user = value;
     notifyListeners();
   }
 
-  AccountDetails ? _accountDetails;
+  AccountDetails? _accountDetails;
 
-  AccountDetails get accountDetails => _accountDetails!;
+  AccountDetails? get accountDetails => _accountDetails;
 
-  set accountDetails(AccountDetails value) {
+  set accountDetails(AccountDetails? value) {
     _accountDetails = value;
     notifyListeners();
   }
 
-  Address ? _addressSelected;
-
-  Address get addressSelected => _addressSelected!;
-
-  set addressSelected(Address value) {
-    _addressSelected = value;
+  set phoneNumber(String phoneNumber){
+    _accountDetails!.phoneNumber = phoneNumber;
     notifyListeners();
   }
+
 }

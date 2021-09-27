@@ -1,51 +1,37 @@
-import 'package:baqal/src/di/app_injector.dart';
-import 'package:baqal/src/repository/firestore_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:baqal/src/models/main_category_model.dart';
+import 'package:baqal/src/models/name_field.dart';
+import 'package:baqal/src/models/sub_category_model.dart';
 import 'package:flutter/foundation.dart';
 
 class CategoriesProvider extends ChangeNotifier {
-  var _firestoreRepo = getItInstance<FirestoreRepository>();
+  List<MainCategoryModel> _mainCategories = [];
+  List<SubCategoryModel> _subCategories = [];
+  MainCategoryModel? _currentMainCategory;
+  SubCategoryModel? _currentSubCategory;
 
-  int categoriesPageIndex = 0;
-  bool categoriesFinished = false;
-
-  Future fetchCategories({required String categoryName}) async {
-    var categoryInfo;
-    try {
-      if (categoriesPageIndex <= 3) {
-        if (categoriesPageIndex == 0) {
-          categoryInfo =
-              await _firestoreRepo.getCategoyInfo(isMainCategories: true);
-        }
-        if (categoriesPageIndex > 0) {
-          categoryInfo =
-              await _firestoreRepo.getCategoyInfo(categoryName: categoryName);
-        }
-
-        if (categoriesPageIndex < 3) {
-          categoriesPageIndex++;
-        } if (categoriesPageIndex == 3) {
-          categoriesFinished = true;
-          notifyListeners();
-        }
-        print(
-            'categoriesPageIndex is $categoriesPageIndex ');
-        return categoryInfo;
-      }
-
-    } catch (e) {
-      print(e);
-    }
+  int get currentCategoryIndex {
+    return _mainCategories.indexWhere((element) => element.id == currentMainCategory!.id);
   }
 
-  Future<bool> popPage()async{
-    if(categoriesPageIndex > 0){
-      categoriesPageIndex--;
-      print(
-          'categoriesPageIndex is $categoriesPageIndex ');
-      categoriesFinished = false;
-      notifyListeners();
-    }
-    return true;
+  set setSubCategories(List<SubCategoryModel> subCategories) {
+    _subCategories = subCategories;
   }
+
+  set setMainCategories(List<MainCategoryModel> mainCategory) {
+    _mainCategories = mainCategory;
+  }
+
+  set setCurrentSubCategory(SubCategoryModel subCategory) {
+    _currentSubCategory = subCategory;
+    _currentMainCategory = _mainCategories.firstWhere(
+        (mainCategory) => subCategory.mainCategoryId == mainCategory.id);
+  }
+
+  get mainCategories => _mainCategories;
+
+  get subCategories => _subCategories;
+
+  MainCategoryModel? get currentMainCategory => _currentMainCategory;
+
+  SubCategoryModel? get currentSubCategory => _currentSubCategory;
 }

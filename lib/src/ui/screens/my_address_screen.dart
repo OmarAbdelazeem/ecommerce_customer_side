@@ -1,70 +1,58 @@
-import 'package:baqal/src/core/navigation.dart';
-import 'package:baqal/src/ui/screens/add_address_screen.dart';
+import 'package:baqal/src/notifiers/addresses_provider.dart';
+import 'package:baqal/src/notifiers/language_notifier.dart';
+import 'package:baqal/src/notifiers/provider_notifier.dart';
+import 'package:baqal/src/routes/router_utils.dart';
+import 'package:baqal/src/routes/routes_constants.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:baqal/src/bloc/address_card/address_card.dart';
-import 'package:baqal/src/bloc/address_card/address_card_state.dart';
 
-import 'package:baqal/src/bloc/my_address/my_address.dart' as my_address;
 import 'package:baqal/src/di/app_injector.dart';
 import 'package:baqal/src/models/account_details_model.dart';
-import 'package:baqal/src/notifiers/account_provider.dart';
-import 'package:baqal/src/res/app_colors.dart';
 import 'package:baqal/src/res/string_constants.dart';
 import 'package:baqal/src/res/text_styles.dart';
 import 'package:baqal/src/ui/common/action_text.dart';
-import 'package:baqal/src/ui/common/common_app_loader.dart';
 
 class MyAddressScreen extends StatefulWidget {
-  final bool selectedAddress;
+  final bool selectAddress;
 
-  MyAddressScreen({this.selectedAddress = false});
+  MyAddressScreen({this.selectAddress = false});
 
   @override
   _MyAddressScreenState createState() => _MyAddressScreenState();
 }
 
 class _MyAddressScreenState extends State<MyAddressScreen> {
-  my_address.MyAddressCubit myAddressCubit = getItInstance<my_address.MyAddressCubit>();
+  final languageProvider = getItInstance<LanguageProvider>();
+  final routerUtils = getItInstance<RouterUtils>();
 
   @override
   void initState() {
+
     super.initState();
-    myAddressCubit.listenToAccountDetails();
-    myAddressCubit.fetchAccountDetails();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
           elevation: 1,
-          title: Text(widget.selectedAddress
-              ? StringsConstants.selectAddress
-              : StringsConstants.myAddress)),
-      body: BlocConsumer<my_address.MyAddressCubit, my_address.MyAddressState>(
-        bloc: myAddressCubit,
-        listener: (BuildContext context, my_address.MyAddressState state) {},
-        builder: (BuildContext context, my_address.MyAddressState state) {
-          return state.map(showAccountDetails: (my_address.ShowAccountDetails value) {
-            if (value.accountDetails.addresses!.isEmpty) {
-              return noAddressesFound(value.accountDetails);
-            }
-            return addressesView(value.accountDetails);
-          }, loading: (my_address.Loading value) {
-            return Center(
-              child: CommonAppLoader(),
-            );
-          }, error: (value) {
-            return Text(value.errorMessage);
-          });
+          title: Text(widget.selectAddress
+              ? languageProvider.getTranslated(context, StringsConstants.selectAddress)!
+              : languageProvider.getTranslated(context, StringsConstants.myAddress)!)),
+      body: ProviderNotifier(
+        child: (AddressesProvider addressesProvider){
+          print('from my_address screen ${addressesProvider.addresses}');
+           if(addressesProvider.addresses.isEmpty)
+            return noAddressesFound();
+          else
+            return addressesView(addressesProvider.addresses);
         },
-      ),
+      )
     );
   }
 
-  Widget addressesView(AccountDetails accountDetails) {
+  Widget addressesView(List<Address> addresses) {
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -78,14 +66,12 @@ class _MyAddressScreenState extends State<MyAddressScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${accountDetails.addresses!.length} ${StringsConstants.savedAddresses}",
-                    style: AppTextStyles.medium12Color81819A,
+                    "${addresses.length} ${languageProvider.getTranslated(context, StringsConstants.savedAddresses)}",
+                    style: AppTextStyles.normalText,
                   ),
                   ActionText(
-                    title: StringsConstants.addNewCaps,
-                    onTap: () {
-                      addNewNavigation(accountDetails);
-                    },
+                    title: languageProvider.getTranslated(context, StringsConstants.addNewTextCapital)!,
+                    onTap: addNewAddressFunction,
                   )
                 ],
               ),
@@ -93,8 +79,10 @@ class _MyAddressScreenState extends State<MyAddressScreen> {
             SizedBox(
               height: 21,
             ),
-            ...List<Widget>.generate(accountDetails.addresses!.length, (index) {
-              return addressCard(accountDetails, index);
+            ...List<Widget>.generate(addresses.length, (index) {
+              return addressCard(
+                addresses[index],
+              );
             })
           ],
         ),
@@ -102,154 +90,7 @@ class _MyAddressScreenState extends State<MyAddressScreen> {
     );
   }
 
-  Widget addressCard(AccountDetails accountDetails, index) {
-    var addressCardCubit = getItInstance<AddressCardCubit>();
-    Address address = accountDetails.addresses![index];
-    Widget data(IconData iconData, String text) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            iconData,
-            color: AppColors.color81819A,
-          ),
-          SizedBox(
-            width: 12,
-          ),
-          Expanded(
-              child: Text(
-            "$text",
-            style: AppTextStyles.normal12Color81819A,
-          ))
-        ],
-      );
-    }
-
-    return BlocConsumer<AddressCardCubit, AddressCardState>(
-      bloc: addressCardCubit,
-      listener: (context, state) {
-        state.when(
-            successful: () {
-              myAddressCubit.fetchAccountDetails();
-            },
-            editLoading: () {},
-            error: (_) {},
-            idle: () {},
-            setDefaultLoading: () {});
-      },
-      builder: (BuildContext context, AddressCardState state) {
-        return Container(
-            margin: EdgeInsets.only(left: 15, right: 15, bottom: 30),
-            child: InkWell(
-              onTap: widget.selectedAddress
-                  ? () {
-                      var accountProvider = getItInstance<AccountProvider>();
-                      accountProvider.addressSelected =
-                          accountDetails.addresses![index];
-                      Navigator.of(context).pop();
-                    }
-                  : null,
-              child: Card(
-                child: Container(
-                  margin: EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            address.name,
-                            style: AppTextStyles.medium14Black,
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            height: 20,
-                            width: address.isDefault ? null : 0,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: AppColors.color6EBA49,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Text(
-                              StringsConstants.defaultCaps,
-                              style: AppTextStyles.medium14White,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 33,
-                      ),
-                      data(Icons.phone, address.phoneNumber),
-                      SizedBox(
-                        height: 23,
-                      ),
-                      data(Icons.place,
-                          "${address.address} ${address.city} ${address.state}"),
-                      SizedBox(
-                        height: 33,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              ActionText(
-                               title:  StringsConstants.editCaps,
-                                onTap: () {
-                                 Navigation.push(context, AddAddressScreen(false ,editAddress: address,))
-                                      .then((value) {
-                                    if (value != null &&
-                                        value is bool &&
-                                        value) {
-                                      myAddressCubit.fetchAccountDetails();
-                                    }
-                                  });
-                                },
-                              ),
-                              SizedBox(
-                                width: 30,
-                              ),
-                              state is EditLoading
-                                  ? CommonAppLoader(
-                                      size: 20,
-                                    )
-                                  : ActionText(
-                                      title: StringsConstants.deleteCaps,
-                                      onTap: () {
-                                        addressCardCubit.deleteAddress(
-                                            accountDetails, address);
-                                      },
-                                    ),
-                            ],
-                          ),
-                          Visibility(
-                            visible: !address.isDefault,
-                            child: Container(
-                                margin: EdgeInsets.only(left: 20),
-                                child: state is SetDefaultLoading
-                                    ? CommonAppLoader(
-                                        size: 20,
-                                      )
-                                    : ActionText(
-                                        title: StringsConstants.setAsDefaultCaps,
-                                        onTap: () {
-                                          addressCardCubit.setAsDefault(
-                                              accountDetails, index);
-                                        },
-                                      )),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ));
-      },
-    );
-  }
-
-  Widget noAddressesFound(AccountDetails accountDetails) {
+  Widget noAddressesFound() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -257,27 +98,92 @@ class _MyAddressScreenState extends State<MyAddressScreen> {
         children: <Widget>[
           Text(
             "No Address Found",
-            style: AppTextStyles.medium18Black,
+            style: AppTextStyles.normalText,
           ),
           SizedBox(
             height: 20,
           ),
           ActionText(
-            title: StringsConstants.addNewCaps,
-            onTap: () {
-              addNewNavigation(accountDetails);
-            },
+            title: languageProvider.getTranslated(context, StringsConstants.addNewTextCapital)!,
+            onTap: addNewAddressFunction,
           )
         ],
       ),
     );
   }
 
-  addNewNavigation(AccountDetails accountDetails) {
-    Navigation.push(context, AddAddressScreen(true)).then((value) {
-      if (value != null && value is bool && value) {
-        myAddressCubit.fetchAccountDetails();
-      }
-    });
+  Widget addressCard(Address address) {
+    return InkWell(
+      onTap: () {
+        if(widget.selectAddress){
+          final addressesProvider = getItInstance<AddressesProvider>();
+          addressesProvider.selectedAddress = address;
+          routerUtils.pop(context);
+          // Navigator.pop(context);
+        }else{
+          routerUtils.pushNamedRoot(context, Routes.addOrEditAddressScreen,
+              arguments: address);
+          // Navigator.pushNamed(context, Routes.addOrEditAddressScreen,
+          //     arguments: address);
+        }
+
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${address.area} , ${address.streetName}",
+              // style: AppTextStyles.normal12Color81819A,
+            ),
+            address.addressDescription != null &&
+                    address.addressDescription!.isNotEmpty
+                ? Column(
+                    children: [
+                      SizedBox(height: 10,),
+                      Text(address.addressDescription!),
+                    ],
+                  )
+                : Container(),
+            address.buildingNumber != null && address.buildingNumber!.isNotEmpty
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                          '${address.buildingNumber! + address.floorNumber! ?? ''}'),
+                    ],
+                  )
+                : Container(),
+            address.landmarkSign != null && address.landmarkSign!.isNotEmpty
+                ? Column(
+                  children: [
+                    SizedBox(height: 10,),
+                    Text('${address.landmarkSign}'),
+                  ],
+                )
+                : Container(),
+            SizedBox(
+              height: 10,
+            ),
+            Text('Phone number : ${address.phoneNumber}'),
+            SizedBox(
+              height: 10,
+            ),
+            Divider(
+              thickness: 1,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  addNewAddressFunction() {
+    routerUtils.pushNamedRoot(context, Routes.addOrEditAddressScreen,);
+    // Navigator.pushNamed(context, Routes.addOrEditAddressScreen,);
   }
 }

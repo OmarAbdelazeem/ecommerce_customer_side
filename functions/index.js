@@ -9,7 +9,7 @@ admin.initializeApp();
 // 1-  when new customer just joined
 
 
-exports.onJoinNewCutomer = functions.firestore.document('users/{userId}').onCreate(async (snapshot , context)=>{
+exports.onJoinNewCustomer = functions.firestore.document('users/{userId}').onCreate(async (snapshot , context)=>{
 const userId = context.params.userId;
 const userData = snapshot.data();
 
@@ -18,7 +18,7 @@ const userData = snapshot.data();
 var newUserInfo = {'name' : userData['name'], 'id': userId , 'date' : userData['date']};
 console.log('newUserInfo is' , newUserInfo);
 
-admin.firestore().collection('notification').doc().set(newUserInfo)});
+admin.firestore().collection('notifications').doc().set(newUserInfo)});
 
 
 /******************************************************/
@@ -26,124 +26,108 @@ admin.firestore().collection('notification').doc().set(newUserInfo)});
 // 2- when customer create order
 
 exports.onCreateOrder = functions.firestore
- .document("/users/{userId}/orders/{orderId}/details/{details}")
+ .document("/orders/{orderId}")
   .onCreate(async (snapshot, context) => {
-    const orderCreated = snapshot.data();
+    const createdOrder = snapshot.data();
     const orderId = context.params.orderId;
 
    ////  add order to orders collection in admin panel
-    var firstOrderItemImage = orderCreated['order_items'][0]['image'];
-    var basicOrderInfo = {
-      'order_id':orderCreated['order_id'],
-      'total':orderCreated['total'],
-      'orderNumber':orderCreated['orderNumber'],
-      'order_status': orderCreated['order_status'],
-      'userId': orderCreated['userId'],
-      'ordered_at': orderCreated['ordered_at'],
-      'image':firstOrderItemImage,
-    }
+    const userId = createdOrder['user_id'];
 
-    const ordersRef = admin
-      .firestore()
-      .collection("orders")
-      .doc(orderId);
-     await ordersRef.set(basicOrderInfo);
-     await ordersRef.collection('details').doc('details').set(orderCreated);
-      
-      updateAnalytics({orders : true});
+    console.log('userId is ',userId);
+    console.log('orderId', orderId);
+
+      const userOrdersRef = admin.firestore().collection('users').doc(userId).collection('orders').doc(orderId);
+
+     await userOrdersRef.set(createdOrder);
+//      updateAnalytics({orders : true});
     
   });
 
 
   /******************************************************/
 
-  // 3-  when customer cancel order
+  // 3-  when order status changed
 
-  exports.onCancelOrder = functions.firestore
-    .document("/users/{userId}/orders/{orderId}")
+  exports.onOrderStatusChanged = functions.firestore
+    .document("/orders/{orderId}")
     .onUpdate(async (change, context) => {
-      const orderCancelled = change.after.data();
-      const userId = context.params.userId;
+
+      const updatedOrderData = change.after.data();
+
+      const userId = updatedOrderData['user_id'];
+
       const orderId = context.params.orderId;
-      var status = orderCancelled['order_status']
+
+      var status = updatedOrderData['order_status'];
+
         console.log('userId is : ', userId);
         console.log('orderId is : ', orderId);
         console.log('status is' , status);
-        //// cancel order in admin orders collection
-        if(status == 'Canceled'){
-          console.log('condition is true');
-          var ordersRef = admin
-          .firestore()
-          .collection("orders")
-          .doc(orderId);
 
 
-          // update basic order info
-          ordersRef.get().then(doc =>{
-           if (doc.exists)
-           {
-           console.log('doc is exist');
-              doc.ref.update({'order_status':'Canceled'});
-             }
-          });
+        var userOrders = admin.firestore().collection('users').doc(userId).collection('orders').doc(orderId);
 
-          // update order details info
+        if(status == 'Delivering'){
+          var orderNumber = updatedOrderData['order_number'];
+          // update user order data
+          userOrders.update({'order_status':status , 'order_number': orderNumber});
 
-          ordersRef.collection('details').doc('details').get().then((doc)=>{
-            if(doc.exists){
-              doc.ref.update({'order_status':'Canceled'});
-            }
-          });
-
+        }else{
+          
+          // update user order data
+          userOrders.update({'order_status':status});
         }
+
      
     });
 
-    // add date as id to document day
 
-    async function updateAnalytics ( {orders = false,
+    async function updateStatistics ( {orders = false,
     cancelledOrders = false,
-    users = false,
+    customers = false,
   }={}){
-            // add analytics to total - year - month - day 
-      const analyticsRef = admin.firestore().collection('analytics');
+            // add statistics to total - year - month - day 
+      const statisticsRef = admin.firestore().collection('statistics');
+
       const date = new Date();
+
       const currentYear = date.getFullYear();
       const currentMonth = date.getMonth();
       const currentDay = date.getDate();
       var fieldName = new String();
-      var analyticField;
+      var statisticField;
       var updatingField = new Map();
 
 
       if(orders)
       fieldName = 'orders';
       else if(cancelledOrders)
-      fieldName = 'cancelledOrders';
-      else if (users)
-      fieldName = 'users';
+      fieldName = 'canceled_orders';
+      else if (customers)
+      fieldName = 'customers';
     
     
 
-      if(orders || cancelledOrders || users){
+      if(orders || cancelledOrders || customers){
     
 
-       // 1-update order to total analytics  
+       // 1-update order to total statistics  
 
      
-       const totalAnalyticsRef = analyticsRef.doc('total');
-       const totalDoc =  await totalAnalyticsRef.get();
+       const totalStatisticsRef = statisticsRef.doc('total');
+       const totalDoc =  await totalStatisticsRef.get();
        const totalData =  totalDoc.data();
-      analyticField = totalData[fieldName];
-      console.log(fieldName ,'from total is ',analyticField);
-      updatingField = {[fieldName] : analyticField+1};
-      totalAnalyticsRef.update(updatingField);
+      statisticField = totalData[fieldName];
+      console.log(fieldName ,'from total is ',statisticField);
+      updatingField = {[fieldName] : statisticField+1};
+      totalStatisticsRef.update(updatingField);
      
 
 
-      // 2 -update order analytics to it is year
+      // 2 -update order statistics to it is year
       
-      const yearAnalyticsRef = analyticsRef.doc('calendar').collection('all_years').doc(String(currentYear));
+      const yearAnalyticsRef = statisticsRef.doc('calendar').collection('all_years').doc(String(currentYear));
 
 
       const yearDoc = await yearAnalyticsRef.get();
@@ -152,43 +136,66 @@ exports.onCreateOrder = functions.firestore
       const yearData =  yearDoc.data();
 
 
-      analyticField = yearData[fieldName];
+      statisticField = yearData[fieldName];
 
-      console.log(fieldName ,'from year is ',analyticField);
+      console.log(fieldName ,'from year is ',statisticField);
 
-      updatingField = {[fieldName] : analyticField+1};
+      updatingField = {[fieldName] : statisticField+1};
 
       yearAnalyticsRef.update(updatingField);
     
 
 
-     // 3 -update order analytics to it is month
+     // 3 -update order statistics to it is month
     
-      const monthAnalyticsRef = analyticsRef.doc('calendar').collection('all_years').doc(String(currentYear)).collection('months').doc(String(currentMonth+1));
+      const monthAnalyticsRef = statisticsRef.doc('calendar').collection('all_years').doc(String(currentYear)).collection('months').doc(String(currentMonth+1));
       const monthDoc = await monthAnalyticsRef.get();
       const monthData = monthDoc.data();
       console.log('monthId' ,'is',monthDoc.id);
-      analyticField = monthData[fieldName];
-      updatingField = {[fieldName] : analyticField+1};
-      console.log(fieldName ,'from months is ',analyticField);
+      statisticField = monthData[fieldName];
+      updatingField = {[fieldName] : statisticField+1};
+      console.log(fieldName ,'from months is ',statisticField);
       monthAnalyticsRef.update(updatingField);
 
     
 
-    // 4- update order analytics to it is day 
+    // 4- update order statistics to it is day 
 
     
       const currentDayId = new Date(Date.UTC(currentYear,currentMonth ,currentDay,12)).toISOString();
-      const dayAnalyticsRef = analyticsRef.doc('calendar').collection('all_days').doc(currentDayId);
+      const dayAnalyticsRef = statisticsRef.doc('calendar').collection('all_days').doc(currentDayId);
       console.log('currentDayId is',currentDayId);
       const dayDoc = await dayAnalyticsRef.get();
       console.log('dayDoc is',dayDoc);
       const dayData =  dayDoc.data();
-      analyticField = dayData[fieldName];
-      updatingField = {[fieldName] : analyticField+1};
-      console.log(fieldName ,'from days is ',analyticField);
+      statisticField = dayData[fieldName];
+      updatingField = {[fieldName] : statisticField+1};
+      console.log(fieldName ,'from days is ',statisticField);
       dayAnalyticsRef.update(updatingField);
       }
     
       }
   
+
+      /*
+      // statistics collection
+      should I delete products and customers from statistics ? yes
+
+      structure of statistics => statistics => calender => years , months , days
+
+        when should I update statistics ?
+        1 - canceled orders when customer or admin cancel order => (orders collection) => // there is a special case ....
+
+        2 - delivered orders when admin mark order as delivered => (orders collection)
+        3 - total income when admin mark order as delivered => (orders collection)
+        4 - total orders when customer place order => (orders collection)
+
+
+      (1) scenario solution 
+      if new product added then increment added_prdoucts field for days , months , years
+      else deleted decrement added_prdoucts field days , months , years
+      get day id from product date
+
+
+
+      */

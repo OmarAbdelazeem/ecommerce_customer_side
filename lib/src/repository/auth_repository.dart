@@ -12,38 +12,43 @@ class FirebaseRepository {
   ///
   /// Helper Functions
   ///
-  Future<AuthResultStatus> createAccount({email, pass}) async {
-    try {
-      UserCredential authResult = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: pass);
-      if (authResult.user != null) {
-        _status = AuthResultStatus.successful;
-      } else {
-        _status = AuthResultStatus.undefined;
-      }
-    } catch (e) {
-      print('Exception @createAccount: $e');
-      _status = AuthExceptionHandler.handleException(e);
-    }
-    return _status;
-  }
+  ///
+  // Future<AuthResultStatus> createAccount({email, pass}) async {
+  //   try {
+  //     UserCredential authResult = await _firebaseAuth.createUserWithEmailAndPassword(
+  //         email: email, password: pass);
+  //     if (authResult.user != null) {
+  //       _status = AuthResultStatus.successful;
+  //     } else {
+  //       _status = AuthResultStatus.undefined;
+  //     }
+  //   } catch (e) {
+  //     print('Exception @createAccount: $e');
+  //     _status = AuthExceptionHandler.handleException(e);
+  //   }
+  //   return _status;
+  // }
 
-  Future<AuthResultStatus> login({email, pass}) async {
-    try {
-      final authResult =
-      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: pass);
+  // Future<AuthResultStatus> login({email, pass}) async {
+  //   try {
+  //     final authResult =
+  //     await _firebaseAuth.signInWithEmailAndPassword(email: email, password: pass);
+  //
+  //     if (authResult.user != null) {
+  //       _status = AuthResultStatus.successful;
+  //
+  //     } else {
+  //       _status = AuthResultStatus.undefined;
+  //     }
+  //   } catch (e) {
+  //     print('Exception @createAccount: $e');
+  //     _status = AuthExceptionHandler.handleException(e);
+  //   }
+  //   return _status;
+  // }
 
-      if (authResult.user != null) {
-        _status = AuthResultStatus.successful;
-
-      } else {
-        _status = AuthResultStatus.undefined;
-      }
-    } catch (e) {
-      print('Exception @createAccount: $e');
-      _status = AuthExceptionHandler.handleException(e);
-    }
-    return _status;
+  void updatePhoneNumber(PhoneAuthCredential phoneCredential)async{
+   await _firebaseAuth.currentUser!.updatePhoneNumber(phoneCredential);
   }
 
   logout() async{
@@ -80,42 +85,42 @@ class FirebaseRepository {
     }
   }
 
-  setAccountDetails({required String displayName, String ? photoUrl}) async {
-    // UserUpdateInfo updateInfo = UserUpdateInfo();
-    // updateInfo.displayName = displayName;
-    // updateInfo.photoUrl = photoUrl;
-    await FirebaseAuth.instance.currentUser!.updateProfile(displayName:displayName);
-    await FirebaseAuth.instance.currentUser!.updateProfile(photoURL: photoUrl);
-    // (await getCurrentUser()).updateProfile(updateInfo);
-  }
+  // setAccountDetails({required String displayName, String ? photoUrl}) async {
+  //   // UserUpdateInfo updateInfo = UserUpdateInfo();
+  //   // updateInfo.displayName = displayName;
+  //   // updateInfo.photoUrl = photoUrl;
+  //   await FirebaseAuth.instance.currentUser!.updateProfile(displayName:displayName);
+  //   await FirebaseAuth.instance.currentUser!.updateProfile(photoURL: photoUrl);
+  //   // (await getCurrentUser()).updateProfile(updateInfo);
+  // }
 
-  Future<String> getUid() async {
-    User user =  _firebaseAuth.currentUser!;
-    return user.uid;
-  }
+  // Future<String> getUid() async {
+  //   User user =  _firebaseAuth.currentUser!;
+  //   return user.uid;
+  // }
+  //
+  // Future<String> getPhoneNumber() async {
+  //   User user =  _firebaseAuth.currentUser!;
+  //   return  user.phoneNumber!;
+  // }
 
-  Future<String> getPhoneNumber() async {
-    User user =  _firebaseAuth.currentUser!;
-    return  user.phoneNumber!;
-  }
-
-  Future<User> getCurrentUser() async {
-    User user =  _firebaseAuth.currentUser!;
+  Future<User?> ? getCurrentUser() async {
+    User ? user =  _firebaseAuth.currentUser;
     return user;
   }
 
 
-  Future<bool> checkUserLoggedInStatus() async {
-    try {
-      User user = await getCurrentUser();
-      if (user == null) {
-        return false;
-      } else
-        return true;
-    } catch (e) {
-      return false;
-    }
-  }
+  // Future<bool> checkLoggedInStatus() async {
+  //   try {
+  //     User ? user = await getCurrentUser();
+  //     if (user == null) {
+  //       return false;
+  //     } else
+  //       return true;
+  //   } catch (e) {
+  //     return false;
+  //   }
+  // }
 
 }
 
