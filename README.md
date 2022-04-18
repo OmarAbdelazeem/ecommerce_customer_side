@@ -1,4 +1,4 @@
-# baqal
+# Baqal customer side
 
 A new Flutter application.
 
